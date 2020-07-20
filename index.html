@@ -1,1 +1,529 @@
-hello
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/shuttlecarrier.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>SPOO Platform - Build your platform.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="description" content="The most natural, flexible and simple technology to build and run real use cases.">
+    <meta name="keywords" content="digitalisation, apps, platform, collaboration">
+    <meta name="viewport" content="width=device-width" />
+    <link href="bootstrap3/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/ct-paper.css" rel="stylesheet" />
+    <link href="assets/css/demo.css" rel="stylesheet" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130175930-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-130175930-1');
+    </script>
+    <!--     Fonts and icons     -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        // if (localStorage['cookiesAccepted']) return;
+
+    window.addEventListener("load", function() {
+        if (localStorage["cookiesAccepted"]) return;
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#252e39"
+                },
+                "button": {
+                    "background": "#14a7d0"
+                }
+            },
+            onStatusChange: function(status) {
+                if (status == "dismiss") localStorage["cookiesAccepted"] = true;
+            },
+            "theme": "classic",
+            "position": "bottom-right",
+            "content": {
+                "message": "We use cookies to optimize your experience. By using taahis site, you accept cookies to be stored on your device.",
+                "href": "tbd..."
+            }
+        })
+
+
+    });
+    </script>
+    <style type="text/css">
+    body {
+        zoom: 100% !important;
+    }
+
+    @media only screen and (max-width: 480px) {
+        html {
+            width: 107% !important;
+        }
+    }
+
+    .container-expand {
+
+        max-width: 1500px !important;
+        padding-right: 35px;
+
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .vertical_center {
+        display: flex;
+    }
+
+    .masonry-3 {
+        column-count: 3;
+        column-gap: 0;
+    }
+
+    .main-card {
+        width: 100%;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 3px 1px rgba(64, 64, 64, 0.17); //margin: 5px;
+        border-radius: 10px;
+        text-align: left;
+        padding: 50px;
+    }
+
+    .bg-card {
+        padding: 50px;
+    }
+
+    .h2-m {
+        font-size: 53px;
+    }
+
+    .h4-m {
+        font-size: 30px;
+        font-weight: normal;
+    }
+
+
+    .row_ {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .row_>[class*='col_'] {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    h4,
+    .h4 {
+        font-weight: 100;
+    }
+
+    pre,
+    code {
+        background: #F5F5F5 !important;
+        color: #818181 !important;
+        border: none !important;
+    }
+    </style>
+</head>
+
+<body style="background:#FFFFFF !important;">
+    <nav class="navbar navbar-ct-transparent" role="navigation-demo" id="sticky-navbar" style="background:#FFFFFF; width:100%;">
+        <div class="container-expand">
+            <ul class="nav navbar-nav " style=" display:inline-block;margin-bottom: -15px;">
+                <li>
+                    <a class="pointer text-black" href="#what"><b>Features</b></a>
+                </li>
+                <li>
+                    <a class="pointer text-black" href="#getstarted"><b>License</b></a>
+                </li>
+                <li>
+                    <a class="pointer text-black" href="#why"><b>Why </b></a>
+                </li>
+            </ul>
+            <div class="collapse navbar-collapse" id="navigation-example-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://objy-org.github.io" class="text-black" target="_blank" style="font-size: 22px;padding: 0px;margin-top:20px;">
+                            Built with <img src="objylogo.png" style="height: 50px;"> OBJY
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </nav>
+    <div class="wrapper" id="app" style="background: #FFFFFF;">
+        <div class="demo-header " style="display:initial;    ">
+            <div class="motto text-center container-expand" style="padding:80px 50px;text-shadow:none;">
+                <div class="row">
+                    <div class="col col-sm-12">
+                        <div class="row bg-card" style="background:#FFFFFF">
+                            <div class="col col-sm-12 text-center">
+                                <img src="assets/img/shuttlecarrier.png" style="height: 180px;"> &nbsp;
+                                <span class="text-center" style="font-size:50px;color:#313131;text-shadow:none;    display: flex;align-items: center;justify-content:center">
+                                    Spin up a&nbsp;<b>PLATFORM</b>&nbsp;in seconds.
+                                </span>
+                                <br>
+                                <h3 style="font-size:40px;color:#888888">
+                                    Don't pick a platform, build YOUR platform. Exactly like you need it, taylored for your problem or industry
+                                </h3>
+
+                                <br>
+                                <br>
+
+                                <div class="btn">Docs</div> &nbsp; <div class="btn">Get started</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:10px;display:block"></div>
+            <div class="container-expand row">
+                <div class="col col-sm-6 top-buffer">
+                    <div class="bg-card">
+                        <div class="row">
+                            <div class="col col-sm-12 ">
+                                <div class="main-card-label">SERVER</div>
+                                <br>
+                                <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:0px;font-size:19px" >SPOO.define({
+    name: "object", 
+    pluralName: "objects"
+})
+
+SPOO.REST().run()
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-6 top-buffer">
+                    <div class="bg-card ">
+                        <div class=" ">
+                            <div class="main-card-label">CLIENT</div>
+                            <pre style="font-size:15px;">
+                                    <code class="javascript" style="padding:0px;font-size:19px" >spoo.io().auth({
+    username: "peter",
+    password: "pass"
+});
+
+spoo.io().objects().get()
+</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span id="what" name="what"></span>
+            <div style="height:150px;display:block"></div>
+            <div class="container-expand ">
+                <div class="row ">
+                    <div class="col col-sm-12 col-sm-offset-0">
+                        <div class="">
+                            <div class="row">
+                                <div class="col col-sm-12">
+                                    <div class="main-header text-center">Features
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="masonry-3 ">
+                                <div class="masonry-item text-left">
+                                    <div class="bg-card">
+                                        <div class="main-card-label">READY-TO-GO</div>
+                                        <br>
+                                        <br>
+                                        <img src="assets/img/shuttlecarrier.png" style="max-width:80%">
+                                        <br>
+                                        <div class="app-icon-landing" style="text-align:left !important;">
+                                            <h4>A SPOO platform can be run in seconds.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="masonry-item text-left  ">
+                                    <div class="bg-card">
+                                        <div class="main-card-label">CROSS-APPLICATIONS DATA SHARING</div>
+                                        <br>
+                                        <br>
+                                        <img src="icons/database-smart.png" style="max-width:40%">
+                                        <br>
+                                        <div class="app-icon-landing" style="text-align:left !important;">
+                                            <h4>Enrich your existing data by adding automated behaviour, actions and time-based observation to it</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="masonry-item text-left">
+                                    <div class="bg-card">
+                                        <div class="main-card-label">ANY INFRASTRUCTURE, ANY SCALE</div>
+                                        <br>
+                                        <br>
+                                        <img src="icons/extend.png" style="max-width:40%">
+                                        <br>
+                                        <div class="app-icon-landing" style="text-align:left !important;">
+                                            <h4>SPOO is written in JavaScript, meaning it can run on pretty much any platform. From single-server to big k8s clusters.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="masonry-item text-left  ">
+                                    <div class="bg-card">
+                                        <div class="main-card-label">USER MANAGEMENT, ACCESS CONTROL</div>
+                                        <br>
+                                        <br>
+                                        <img src="icons/anywhere.png" style="max-width:40%">
+                                        <br>
+                                        <div class="app-icon-landing" style="text-align:left !important;">
+                                            <h4>Giving users the ability to register, login, change passwords, all the usual stuff, ist already built-in.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="masonry-item text-left">
+                                    <div class="bg-card">
+                                        <div class="main-card-label">SIMPLE PROGRAMMING</div>
+                                        <br>
+                                        <br>
+                                        <img src="objylogo.png" style="max-width:40%">
+                                        <br>
+                                        <div class="app-icon-landing" style="text-align:left !important;">
+                                            <h4>SPOO runs on OBJY and uses dynamic, behaviour-driven objects as it's main piece of abstraction</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="masonry-item text-left">
+                                    <div class="bg-card">
+                                        <div class="main-card-label">ADJUSTABLE, EXTENDABLE</div>
+                                        <br>
+                                        <br>
+                                        <img src="icons/combine.png" style="max-width:40%">
+                                        <br>
+                                        <div class="app-icon-landing" style="text-align:left !important;">
+                                            <h4>Make it your platform! Plug-in third party systems, databases or services natively, using our mapper system.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container-expand" id="getstarted" name="getstarted">
+                <div class="">
+                    <center>
+                        <div class="main-header">License</div>
+                    </center>
+                    <br>
+                    <center>
+                        <div class="row">
+                            <div class="col col-sm-10 col-sm-offset-1">
+                                <h4>
+                                    SPOO is open source and licensed under the AGPL license which means, you can use it for free, if your product is also free and open source. If you're planning on using SPOO in commercial products, you'll need a properitary license.
+                                </h4>
+                            </div>
+                        </div>
+                    </center>
+                    <br>
+                    <br> <br>
+                    <div class="row text-center">
+                        <div class="col col-sm-4 col-sm-offset-2 text-left">
+                            <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
+                                <div class="main-card-label">FREE</div>
+                                <br>
+                                <br>
+                                <div><em class="icon fa fa-code" style="font-size:55px"></em></div>
+                                <br>
+                                <div class="app-icon-landing" style="text-align:left !important;">
+                                    <h3>Open Source</h3>
+                                    <br>
+                                    <h5>Use SPOO in your project for free. Create the future of the digital world, today.
+                                        <br>
+                                        <br>
+                                        coming soon...
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-sm-4 text-left">
+                            <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
+                                <div class="main-card-label">COMMERCIAL</div><br>
+                                <!--img src="assets/img/spoo-cloud.png" style="max-width:90%"-->
+                                <br>
+                                <div><em class="icon fa fa-globe" style="font-size:55px"></em></div>
+                                <br>
+                                <div class="app-icon-landing" style="text-align:left !important;">
+                                    <h3>Run a commercial platform</h3>
+                                    <br>
+                                    <h5>Build and run a platform for <u>your</u> industry, your customers, even for yourself.
+                                        <br>
+                                        <br>
+                                        coming soon...</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span id="why" name="why"></span>
+            <div style="height:150px;display:block"></div>
+            <center>
+                <div class="main-header">Why SPOO?<br><br>
+                </div>
+            </center>
+            <div class="container-expand">
+                <div class="row bg-card">
+                    <div class="col col-sm-4 top-buffer">
+                        <div class="bg-card ">
+                            <div class="main-card-label text-center">EVERYWHERE, AT ANY SCALE</div>
+                            <br>
+                            <br>
+                            <center>
+                                <img src="icons/database.png" style="max-width:40%">
+                            </center>
+                            <br>
+                            <h3 style="font-size:25px;color:#888888"><b>Runs where JavaScript runs</b> <br><br>
+                                SPOO runs in any JavaScript environment. Browsers, IoT devices, cloud environments, you name it.
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col col-sm-4 top-buffer">
+                        <div class="bg-card">
+                            <div class="main-card-label text-center">VERSATILE AND EASY</div>
+                            <br>
+                            <br>
+                            <center>
+                                <img src="icons/hula-hoop.png" style="max-width:40%">
+                            </center>
+                            <br>
+                            <h3 style="font-size:25px;color:#888888"><b>Build anything, from trivial to high end</b> <br><br>
+                                Modelling use cases and building digital experiences is done through a programming interface, that makes simple and complex things easy to build.
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col col-sm-4 top-buffer">
+                        <div class="bg-card ">
+                            <div class="main-card-label text-center">ADJUSTABLE</div>
+                            <br>
+                            <br>
+                            <center>
+                                <img src="icons/puzzle.png" style="max-width:40%">
+                            </center>
+                            <br>
+                            <h3 style="font-size:25px;color:#888888"><b>Build it like you need it</b> <br><br>
+                                Simply adjust or extend your SPOO environment to perfectly meet the requirements of your industry.
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height:150px;display:block"></div>
+            <br>
+        </div>
+        <div class="main">
+            <div class="section" name="plans" id="plans">
+                <div class="container-expand" style="">
+                   
+                    <div class="row">
+                        <div class="col col-md-12 col-lg-12 text-center">
+                            <div class="row">
+                                <div class=" col col-sm-8 col-sm-offset-2">
+                                    <div class="main-card text-left" style="background: #f3f3f3;box-shadow: none;min-height:auto ">
+                                        <h4>We are currently in private beta. SPOO will be available later this year.</h4>
+                                        <h5 style="font-weight:normal">
+                                            <br>
+                                            However, if you'd like to peek your head in early, sign up for that newsletter.
+                                        </h5>
+                                        <br>
+                                        <div class="text-left p-5 " style="">
+                                            <form action="https://tinyletter.com/spooio" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/spooio', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+                                                <input type="email" name="email" id="tlemail" class="form-control invert-control " style="width:60%;height:60px;max-width:700px;border-radius:100px;background: #e4e4e4;" placeholder="Enter your email"> &nbsp;
+                                                <input type="submit" value="Get me on the list" class="btn btn btn-round btn-fill btn-md btn-info"></input> &nbsp;
+                                            </form>
+                                            <br>
+                                            <p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                        <br>
+                        <div class="col col-sm-12">
+                            <br>
+                            <br>
+                            <footer class="footer-demo " style="color:#414141;">
+                                <div class="container-expand">
+                                    <nav class="pull-left">
+                                        <ul>
+                                            <li>
+                                                <a href="privacy.html" target="_blank">
+                                                    Privacy
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="privacy.html" target="_blank">
+                                                    Imprint
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <div class="copyright pull-right">
+                                        &copy; 2020, SPOO Technologies
+                                    </div>
+                                    <br>
+                                    <center>
+                                        Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0</a>
+                                    </center>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="section-dark ">
+                <div class="container-expand">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="main" style="display:none;">
+        </div>
+        <!-- Modal -->
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+</body>
+<script src="index.js"></script>
+<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<script src="bootstrap3/js/bootstrap.js" type="text/javascript"></script>
+<!--  Plugins -->
+<script src="assets/js/ct-paper-checkbox.js"></script>
+<script src="assets/js/ct-paper-radio.js"></script>
+<script src="assets/js/bootstrap-select.js"></script>
+<script src="assets/js/bootstrap-datepicker.js"></script>
+<script src="assets/js/ct-paper.js"></script>
+
+</html>

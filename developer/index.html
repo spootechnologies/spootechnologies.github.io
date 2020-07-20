@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="../assets/img/spoo_publication.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>SPOO Developer - Turn real life into digital representations</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="description" content="Use the SPOO digitalisation technology to transform real life into apps for anyone.">
+    <meta name="keywords" content="digitalisation, apps, platform, technology, javascript">
+    <meta name="viewport" content="width=device-width" />
+    <link href="../bootstrap3/css/bootstrap.css" rel="stylesheet" />
+    <link href="../assets/css/ct-paper.css" rel="stylesheet" />
+    <link href="../assets/css/demo.css" rel="stylesheet" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130175930-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-130175930-1');
+    </script>
+    <!--     Fonts and icons     -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="../spoo.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/agate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+    // if (localStorage['cookiesAccepted']) return;
+
+    window.addEventListener("load", function() {
+        if (localStorage["cookiesAccepted"]) return;
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#252e39"
+                },
+                "button": {
+                    "background": "#14a7d0"
+                }
+            },
+            onStatusChange: function(status) {
+                if (status == "dismiss") localStorage["cookiesAccepted"] = true;
+            },
+            "theme": "classic",
+            "position": "bottom-right",
+            "content": {
+                "message": "We use cookies to optimize your experience. By using this site, you accept cookies to be stored on your device.",
+                "href": "tbd..."
+            }
+        })
+
+
+    });
+    </script>
+    <style type="text/css">
+    body {
+        zoom: 100% !important;
+    }
+
+    @media only screen and (max-width: 480px) {
+        html {
+            
+        }
+
+        body {
+            
+        }
+    }
+
+    .container-expand {
+
+        max-width: 1800px;
+        padding-right: 35px;
+        max-width: 2000px !important;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1800px !important;
+    }
+
+    .vertical_center {
+        display: flex;
+    }
+
+    .masonry-3 {
+        column-count: 3;
+        column-gap: 0;
+    }
+
+    .main-card {
+        width: 100%;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 3px 1px rgba(64, 64, 64, 0.17);
+        margin: 5px;
+        border-radius: 20px;
+        color: #222222;
+    }
+
+    .main-card .text-shade {
+        color: #515151 !important;
+    }
+
+    .h2-m {
+        font-size: 53px;
+    }
+
+    .h4-m {
+        font-size: 30px;
+        font-weight: normal;
+    }
+
+    .code-card {}
+
+    pre {
+        background-color: none !important;
+        border: none !important;
+        border-radius: 5px;
+    }
+
+    code {
+        border-radius: 15px !important;
+    }
+
+
+    .row_ {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .row_>[class*='col_'] {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .app-icon-lg-light {
+        background: rgba(20, 49, 140, 0.5686274509803921);
+        color: #FFFFFF;
+    }
+    </style>
+</head>
+
+<body style="background:#FFFFFF !important; ">
+    <!--div id='stars3'></div-->
+    <nav class="navbar navbar-ct-transparent" role="navigation-demo" id="sticky-navbar" style="background:rgb(41, 41, 41);width:100%;z-index:999999900000;  ">
+        <div class="container-expand">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a href="https://spoo.io/cloud/developer" style="display:inline-block;float:left;margin-right:20px;">
+                    <div class="logo-container">
+                        <div class="brand" style="margin-top:0px;">
+                            <b style="display: flex;align-items: center;"><img src="../assets/img/spoo_icon_sm.png" style="height: 50px;"> &nbsp; Cloud Developer</b>
+                        </div>
+                    </div>
+                </a>
+
+                &nbsp; &nbsp; 
+
+                 <ul class="nav navbar-nav " style=" display:inline-block;">
+                   
+
+                    <li>
+                        <a href="#examples" class="" >Examples</a>
+                    </li>
+
+                    <li>
+                        <a href="#options" class="" >How</a>
+                    </li>
+
+                    <li>
+                        <a href="#getstarted" class="" >Get started</a>
+                    </li>
+
+                    <li>
+                        <a href="#difference" class="" >Why?</a>
+                    </li>
+                   
+                   
+                </ul>
+
+           
+           
+            </div>
+           
+            <div class="collapse navbar-collapse" id="navigation-example-2">
+                <ul class="nav navbar-nav navbar-right" >
+                   
+                    <li>
+                        <a href="https://medium.com/spoo-io" target="_blank" class="fab fa-medium" style="font-size: 20px;padding: 0px;margin-top:20px;"></a>    
+                    </li>
+                    <li>
+                       &nbsp;&nbsp;
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/spooio" target="_blank" class="fab fa-twitter" style="font-size: 20px;padding: 0px;margin-top:20px;"></a>
+                    </li>
+                     <li>
+                       &nbsp;&nbsp;
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/spooio/" target="_blank" class="fab fa-instagram" style="font-size: 22px;padding: 0px;margin-top:20px;"></a>
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;
+                    </li>
+                    <li>
+                        <a href="https://github.com/spooio" target="_blank" class="fab fa-github" style="font-size: 20px;padding: 0px;margin-top:20px;"></a>
+                    </li>
+                     <li>
+                        &nbsp;&nbsp;
+                    </li>
+                    <li>
+                        <a href=" https://www.npmjs.com/~spootechnologies" target="_blank" class="fab fa-npm" style="font-size: 20px;padding: 0px;margin-top:20px;"></a>
+                    </li>
+                    
+                    <!--li>
+                        <a href="http://www.creative-tim.com/product/paper-kit" target="_blank" class="btn  btn-fill">Apps</a>
+                    </li-->
+                </ul>
+
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+
+
+        
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-->
+    </nav>
+    
+    <div class="wrapper" id="app" style="background: #FFFFFF;">
+        <div class="demo-header " style="display:initial;    ">
+            <div class="motto text-center container-expand" style="padding:100px 50px;text-shadow:none;">
+                <!--h3 style="font-size:35px">A programmable cloud platform to manage<br> and interact with objects of any kind</h3-->
+                <!--img class="pull-right landing-net" src="assets/img/landing-net-4.png"-->
+                <!--h1 class="title-uppercase">SPOO</h1>
+                <h5>"Single Point Of Object"</h5>
+                <br-->
+                
+                <!--img class="landing-net" src="assets/img/landing-net-4.png">
+                <br-->
+
+                <div class="row">
+                    <div class="col col-sm-8">
+                   
+                    <div class="row">
+                        <div class="col col-sm-12 text-left">
+
+                            <h3 class="text-left" style="font-size:40px;color:#313131;text-shadow:none">
+                            
+                            Build digital experiences like never before. With the Single Point of Object Framework.
+                            <br>
+                            In the Cloud.
+
+                          
+                            <br>
+                            <br>
+
+                            <a href="#getstarted" class="btn btn-md btn-fill btn-info"><b>Get started</b></a>
+
+                            <a href="https://spoo.io/docs" class="btn btn-md btn-outline btn-link"><b>API Docs <span class="fa fa-chevron-right"></span></b></a>
+
+                            </h3>
+                          
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+       
+        <div class="main">
+            <div class="section" style="background:#FFFFFF;">
+                <!--div class="container-expand">
+                    <div class="row">
+                        <div class="col col-sm-3" style="margin-right:0px;    min-height: 200px;">
+                            <div class="main-card app-icon-landing-" style="width:100%;margin:0px;text-align:left;    min-height: 200px; ">
+                                <h4>Do anything with objects</h4>
+                                <br>
+                                <h5 class="text-shade">Build use cases around dynamic, behaviour-driven objects.
+
+                    </h5>
+                            </div>
+                        </div>
+                        <div class="col col-sm-3" style="margin-right:0px;    min-height: 200px;">
+                            <div class="main-card app-icon-landing-" style="width:100%;margin:0px;text-align:left;    min-height: 200px;   ">
+                                <h4>Less code, more automation</h4>
+                                <br>
+                                <h5 class="text-shade">All the hard parts have been done for you. Just focus on the case.
+                  
+                    </h5>
+                            </div>
+                        </div>
+                       
+                        <div class="col col-sm-3" style="margin-right:0px;    min-height: 200px;">
+                            <div class="main-card app-icon-landing-" style="width:100%;margin:0px;text-align:left;    min-height: 200px;">
+                                <h4>Simple API</h4>
+                                <br>
+                                <h5 class="text-shade">Building objects and creating use cases is done through simple APSs.
+                               
+                    </h5>
+                            </div>
+                        </div>
+                         <div class="col col-sm-3" style="margin-right:0px;    min-height: 200px;">
+                            <div class="main-card app-icon-landing-" style="width:100%;margin:0px;text-align:left;    min-height: 200px;">
+                                <h4>Built for diversity</h4>
+                                <br>
+                                <h5 class="text-shade">
+
+                                SPOO Cloud can be consumed from any other platform, device or infrastructure.
+                                
+                                
+                    </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </div-->
+                
+                <div class="container-expand">
+                    <div class="main-card feature" style="background: transparent; box-shadow:none; padding:0px;">
+                        <span name="learn" id="learn"></span>
+                        <div class="row row_ section-margin">
+                            <div class="col col-sm-6 col_">
+                                
+                                <div class="main-card" style="background: #38354c;">
+                                <center class="feature" style="color:inherit">
+                                    
+                                        <p align="center">
+                                            <object data="https://vectr.com/marcoboelling/c3tF399dY3.svg?width=500&height=340&select=dSCjtPJdn" type="image/svg+xml" style="width:75%"></object>
+                                        </p>
+                                    
+                                </center>
+                                </div>
+                            </div>
+                            <div class="col col-sm-4 col-sm-offset-1 col_ text-left">
+                                <div class="feature" style="color:inherit">
+                                    <h4 class="">Behaviour-driven objects served on an API</h4>
+                                    <br>
+                                    <h5 style="font-weight:normal">
+                                                                
+                                                                In real life, everything is an object. Every object has characteristics, behaviours and actions.
+                                                                
+                                                                <br>
+                                                                In SPOO, we have adopted the way real life objects work, making them available through our APIs.
+                                                                <br>
+
+                                                            
+
+                                                            </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+               
+                <div class="container-expand">
+                    <span id="examples" name="examples"></span>
+                    <div class="row section-margin">
+                        <div class="col col-sm-3 col-sm-offset-1">
+                            <div class="" >
+                                <h4>Code Examples</h4>
+                                <br>
+                                <div style="font-weight:normal">
+                                                            
+                                                        
+                                                            <!--Take a look inside the object model and our JavaScript API. (We also offer REST)
+
+                                                            <br>
+                                                            <br>
+                                                            <br>-->
+
+                                                            <div class="main-card text-left pointer" v-bind:class="{'active': dev_code_example=='anatomy'}" style="min-height: auto;padding: 10px;" v-on:click="dev_code_example='anatomy'">
+                                                                Object Anatomy
+                                                            </div>
+                                                            <br>
+                                                            <div class="main-card text-left pointer" v-bind:class="{'active': dev_code_example=='crud'}" style="min-height: auto;padding: 10px;" v-on:click="dev_code_example='crud'">
+                                                                Object operations
+                                                            </div>
+                                                            <br>
+                                                            <div class="main-card text-left pointer" v-bind:class="{'active': dev_code_example=='automation'}" style="min-height: auto;padding: 10px;" v-on:click="dev_code_example='automation'">
+                                                                Interval-driven automations
+                                                            </div>
+                                                            <br>
+
+                                                            <div class="main-card text-left pointer" v-bind:class="{'active': dev_code_example=='behaviour'}" style="min-height: auto;padding: 10px;" v-on:click="dev_code_example='behaviour'">
+                                                                React to changes
+                                                            </div>
+                                                            <br>
+                                                            <div class="main-card text-left pointer" v-bind:class="{'active': dev_code_example=='basics'}" style="min-height: auto;padding: 10px;" v-on:click="dev_code_example='basics'">
+                                                               Intitalisation + User auth.
+                                                            </div>
+                                                            <br>
+                                                            <br>
+
+                                                            &nbsp; <a href="https://spoo.io/docs"><b>See more in the API docs <span class="fa fa-chevron-right"></span></b></a>
+
+
+                                                            </div>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6 col-sm-offset-1">
+                            <div class="">
+                                <div class="card card-block code-card text-left">
+                                    <h6 class=" mb-2 "></h6>
+                                    <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:50px;" >
+// Objects are represented as JSON
+
+{
+    "_id": "5a8e80d0e1e1282f7d3121e9",
+    "role": "object",
+    "name": "my name",
+    "type": "my type",
+    "applications": [],
+    "inherits": [],
+    "properties": 
+        {
+            "my prop": {
+                "type" : "shortText",
+                "value" : "hello world",
+        },
+    "permissions": {},
+    "onCreate": null,
+    "onDelete": null,
+}
+
+                                                </code></pre>
+                                    <pre v-show="dev_code_example=='basics'" style="font-size:15px;"><code class="javascript" style="padding:50px;" >
+// Initialize your client.
+spoo = new Client("myworkspace").AppId("myapp");
+
+
+// User login                                      
+spoo.io().auth("username", "password", function(data, err)
+{
+   if(err) console.log("login failed")
+   else console.log("login success")
+}, true)
+
+// User logout                                      
+spoo.io().logout(function(data, err){
+   if(err) console.log("logout failed")
+   else console.log("logout success")
+})
+
+                                                </code></pre>
+                                    <pre v-show="dev_code_example=='crud'" style="font-size:15px;"><code class="javascript" style="padding:50px;" >
+// Add an object
+spoo.io().Object({
+    name : "car",
+    properties: {
+        color:
+        {
+            type: "shortText",
+            value: "blue"
+        }
+    }
+}).add(function(data, err){
+   console.log("ok")
+})
+
+
+// Update an object
+spoo.io().Object("28rh8qhwf")
+   .addProperty({
+      "doors" : {
+        type: "number",
+        value: 4
+      }
+   }).
+   .setPropertyValue("color", "black")
+   .save(function(data, err){
+      console.log("ok")
+   })
+                                                </code></pre>
+                                    <pre v-show="dev_code_example=='automation'" style="font-size:15px;"><code class="javascript" style="padding:50px;" >
+// Add "inspection" automation
+
+spoo.io().Object("28rh8qhwf")
+   .addProperty({
+      "inspection" : {
+        type: "event",
+        interval: "P2Y",
+        action: "dsl.email('peter@griffin.com', 'Car Inspection', 'There is an upcoming inspection...')"
+      }
+   }).
+   .save(function(data, err){
+      console.log("ok")
+   })
+
+/*
+The property of type "event" will be observed by SPOO. On due date, the action, here an email, will be triggered automatically.
+*/
+                                                </code></pre>
+                                    <pre v-show="dev_code_example=='behaviour'" style="font-size:15px;"><code class="javascript" style="padding:50px;" >
+// Create a backup, when an object is changed
+
+spoo.io().Object("28rh8qhwf")
+   .setOnChange("self.object.type = 'backup'; dsl.Object(self.object).add()").
+   .save(function(data, err){
+      console.log("ok")
+   })
+
+/*
+When changed, the action will create a new object, based on the current object, thus create a momentum backup.
+*/
+                                                </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="height:50px;display:block;" id="options" name="options"></div>
+                <br>
+                <div class="container-expand">
+                    <div class="main-card feature" style="background: transparent; box-shadow:none; padding:0px;">
+                        <span name="learn" id="learn"></span>
+                        <div class="row row_ section-margin">
+                            <div class="col col-sm-6 col_">
+                                
+                                <div class="main-card" style="background: #38354c;">
+                                <center class="feature" style="color:inherit">
+                                    
+                                        <p align="center">
+                                            <object data="https://vectr.com/marcoboelling/c4s1CM0Tum.svg?width=640&height=640&select=c4s1CM0Tumpage0" type="image/svg+xml" style="width:70%"></object>
+                                        </p>
+                                    
+                                </center>
+                                </div>
+                            </div>
+                            <div class="col col-sm-4 col-sm-offset-1 col_ text-left">
+                                <div class="feature" style="color:inherit">
+                                    <h4 class="">How it'll work</h4>
+                                    <br>
+                                    <div style="font-weight:normal">
+                                                                
+                                                                Application access SPOO Cloud via a REST API (or an SDK) in the context of a user's workspace and the app identifier:
+                                                                <br><br>
+<pre style="font-size:15px;"><code class="javascript" style="padding:20px;" >
+// REST
+'spoo.io/api/client/WORSPACE/app/YOURAPP/...'
+
+// JS
+
+spoo = new SPOO_Client("workspace").AppId("yourapp")
+</code></pre>
+
+                                                                
+                                                                <br>
+                                                                This works the same way for every workspace/user and every app, meaning that an application can be consumed from any workspace.
+                                                                <br>
+
+                                                            
+
+                                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="main" name="about" id="about">
+            <div class="section" name="plans" id="plans" >
+                <div class="container-expand" style="">
+                    <div class="row">
+                        <div class="row " style="">
+                            <div class="col col-md-12 col-lg-12 text-center">
+                                <div class="">
+                                    
+                                    <div class="row" >
+                                        <div class="col col-sm-12 col-sm-offset-0" style="margin-right:0px;    min-height: 400px;">
+                                            <div class="main-card app-icon-landing-" style="width:100%;margin:0px;text-align:left;   border:none;box-shadow:none; min-height: 200px;  text-align:center;  ">
+                                                <h3>Develop on and for the SPOO Cloud Platform</h3>
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col col-sm-3 col-sm-offset-3">
+                                                        <div class="app-icon-landing main-card">
+                                                            <div style="background: #FFFFFF;color: rgb(201, 69, 58);"><em class="icon fa fa-desktop" style=""></em></div>
+                                                            <div style="background: #FFFFFF;color: rgb(201, 69, 58);"><em class="icon fa fa-globe" style=""></em></div>
+                                                            <div style="background: #FFFFFF;color: rgb(201, 69, 58);"><em class="icon fa fa-mobile" style=""></em></div>
+                                                            <div style="background: #FFFFFF;color: rgb(201, 69, 58);"><em class="icon fa fa-microchip" style=""></em></div>
+                                                            <h4><br>Build a client for any platform<br><br><small >Make your SPOO application available via any client you want. Using our simple API.</small></h4>
+                                                            <br>
+                                                            <a href="https://spoo.io/docs" class="btn btn btn-outline btn-info">API Doc <span class="fa fa-chevron-right"></span></a>
+                                                        </div>
+                                                        
+                                                        <div class="inline-block" style="width:70px"></div>
+                                                    </div>
+                                                    <div class="col col-sm-3">
+                                                    <div class="app-icon-landing main-card">
+                                                            <div class="app-icon-lg" style="background: #FFFFFF;color: rgb(201, 69, 58);box-shadow: 0px 2px 10px rgba(136, 136, 136, 0.5);"><em class="icon fa fa-globe" style="font-size:50px"></em></div>
+                    
+                                                            <h4>SPOO Cloud Web App Hosting<br><br><small >Lean back, while SPOO hosts your web application. Reach users everywhere. With your cross-platform WebApp, PWA or Service.</small></h4>
+                                                            <br>
+                                                            <span>Coming soon...</span>
+                                                        </div>
+                                                        </div>
+                                                    <!--div class="col col-sm-3">
+                                                        <div class="app-icon-landing main-card">
+                                                            <div class="app-icon-lg" style="background: #FFFFFF;color: rgb(201, 69, 58);box-shadow: 0px 2px 10px rgba(136, 136, 136, 0.5);"><em class="icon fa fa-square" style="font-size:50px"></em></div>
+                                                            <h4>Build an applet<br><br><small >Applets are like widgets that will appear in users workspaces. These can be developed with our web-based Applet IDE and will be hosted for you</small></h4>
+                                                            <br>
+                                                            <span>Coming soon...</span>
+                                                        </div>
+                                                        
+                                                    </div-->
+                                                     <!--div class="col col-sm-3">
+                                                        <div class="app-icon-landing main-card" style="background:#FAFAFA;">
+                                                            <div class="app-icon-lg" style="background: #FFFFFF;color: rgb(201, 69, 58);box-shadow: 0px 2px 10px rgba(136, 136, 136, 0.5);"><em class="icon fa fa-upload" style="font-size:50px"></em></div>
+                                                            <h4>Publish to everyone<br><br><small >Make your app available for all users and businesses on SPOO Cloud . Users will be able to login to your app with their account. That's it!</small></h4>
+                                                            <br>
+                                                            <span>Coming soon...</span>
+                                                        </div>
+                                                        
+                                                    </div-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <span id="getstarted" name="getstarted"></span>
+                                    <br>
+                                    <div style="height:100px;display:block;"></div>
+                                    <br>
+                                     <h3>Get started<br></h3>
+                                     <br>
+                                    <div class="row">
+                                        <div class="col col-sm-6 col-sm-offset-1" style="margin-right:0px;    min-height: 400px;">
+                                            <div class="main-card app-icon-landing- " style="width:100%;margin:0px;text-align:left;    min-height: 200px;">
+                                                <h4>1. Create a workspace</h4>
+                                                <br>
+                                               
+
+                                               In order to develop and publish applications, you'll need a SPOO workspace.
+                                                <br>
+
+                                                Once you're singed up, you can use our tools to start creating the future.
+
+
+                   
+                                <br>
+                                <br>
+
+
+
+                    <a href="https://spoo.io/cloud" class="btn btn btn-outline btn-info"><b>Create a workspace <span class="fa fa-chevron-right"></span></b></a>
+
+                   
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-sm-4" style="margin-right:0px;    min-height: 400px;">
+                                            <div class="main-card app-icon-landing- " style="width:100%;margin:0px;text-align:left;    min-height: 200px;">
+                                                <h4>2. Start building</h4>
+                                                <br>
+                                                
+
+                                                <a href="https://spoo.io/console" class="btn btn btn-outline btn-primary"><b>Open SPOO Console <span class="fa fa-chevron-right"></span></b></a>
+
+
+                  
+                                            </div>
+                                        </div>
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col col-sm-12">
+                            <span name="options" id="options"></span>
+                        </div>
+                        <div class="col col-sm-12" >
+                            <span name="getstarted" id="getstarted"></span>
+                            <div class="text-center" style="" v-if="false">
+                                <h4>What you'll get<br></h4>
+                                <h5>Using the SPOO Platform in the cloud let's you focus on the use case.
+                                <br>
+                                Don't worry about infrastructure, architecture, databases or hosting.</h5>
+                            </div>
+                            <div class="row " style="" v-if="false">
+                                <div class="col col-md-12 col-lg-12 text-center">
+                                    <div class="m-5"> 
+                                        <!--img src="https://vectr.com/marcoboelling/c3tF399dY3.png?width=350&height=200&select=a2MjNpi8x9" style="width:65%"-->
+                                        <center>
+                                            <div style="height:50px;display:block;"></div>
+                                           
+                                            <div class="text-left row" style="background: none;box-shadow: none;border: 0px dashed rgb(228, 228, 228);">
+                                                <!--h2 class="text-center">Your workspace </h2>
+                                                                        <br-->
+                                                <div class="col col-sm-1 text-center"></div>
+                                                <div class="col col-sm-2 text-center">
+                                                    <div class="app-label text-center" style="display:inline-block;padding:5px;width:auto;color:#414141;font-size:20px;">
+                                                        <div class="">
+                                                            <div class="app-icon-lg-light app-icon-sm" style="margin:12px;margin-top:-9px;height:100px;width:100px;    
+                                                                                                    text-align: center;
+                                                                                                    padding: 30px;
+                                                                                                ">
+                                                                <span class="fa fa-check" style="width:auto"></span>
+                                                            </div>
+                                                            <br>
+                                                            <h5>Serverless</h5> 
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col col-sm-2 text-center">
+                                                    <div class="app-label text-center" style="display:inline-block;padding:5px;width:auto;color:#414141;font-size:20px;">
+                                                        <span class="">
+                                                                                <div class="app-icon-lg-light app-icon-md" style="margin:12px;margin-top:-9px;height:100px;width:100px;    font-size: 35px;
+                                                                                                   text-align: center;
+                                                                                                    padding: 30px;
+                                                                                                " >
+                                                                                    <span class="fa fa-check" style="width:auto"></span>
+                                                    </div>
+                                                    <br>
+                                                    <h5>Scalable</h5> 
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col col-sm-2 text-center">
+                                                <div class="app-label text-center" style="display:inline-block;padding:5px;width:auto;color:#414141;font-size:20px;">
+                                                    <span class="">
+                                                                                <div class="app-icon-lg-light app-icon-md" style="margin:12px;margin-top:-9px;height:100px;width:100px;    font-size: 35px;
+                                                                                                    text-align: center;
+                                                                                                    padding: 30px;
+                                                                                                " >
+                                                                                    <span class="fa fa-check" style="width:auto"></span>
+                                                </div>
+                                                <br>
+                                                <h5>API-driven</h5> 
+                                                </span>
+                                            </div>
+                                    </div>
+                                    <div class="col col-sm-2 text-center">
+                                        <div class="app-label text-center" style="display:inline-block;padding:5px;width:auto;color:#414141;font-size:20px;">
+                                            <span class="">
+                                                                                <div class="app-icon-lg-light app-icon-md" style="margin:12px;margin-top:-9px;height:100px;width:100px;    font-size: 35px;
+                                                                                                    text-align: center;
+                                                                                                    padding: 30px;
+                                                                                                " >
+                                                                                    <span class="fa fa-check" style="width:auto"></span>
+                                        </div>
+                                        <br>
+                                        <h5>Powerful Tools</h5>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col col-sm-2 text-center">
+                                    <div class="app-label text-center" style="display:inline-block;padding:5px;width:auto;color:#414141;font-size:20px;">
+                                        <span class="">
+                                                                                <div class="app-icon-lg-light app-icon-md" style="margin:12px;margin-top:-9px;height:100px;width:100px;    font-size: 35px;
+                                                                                                    text-align: center;
+                                                                                                    padding: 30px;
+                                                                                                " >
+                                                                                    <span class="fa fa-check" style="width:auto"></span>
+                                    </div>
+                                    <br>
+                                    <h5>Click to ship</h5>
+                                    </span>
+                                </div>
+                            </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="section section-dark section-margin" name="difference" id="difference" style="border-radius: 20px;">
+                    <div class="container-expand" style="">
+                        <div class="row">
+                            <div class="col col-sm-7">
+                                <center class="feature" style="color:inherit">
+                                    <p align="center">
+                                        <img src="../spoo_comparison.png" style="width:80%">
+                                    </p>
+                                </center>
+                            </div>
+                            <div class="col col-sm-5">
+                                <div class="feature" style="color:inherit">
+                                    <h4>The difference</h4>
+                                    <br>
+                                    <div style="font-weight:normal">
+                            
+                                <ul>
+                                <li>Choosing a development platform for your cloud applications can be really hard.
+                                
+                                
+                                You'll have to decide between the hard, but flexible or the simple but inflexible approach.</li>
+                                
+                                <br><br>
+
+                                <li>With SPOO, developing cloud apps is super flexible and simple. That's thanks to the natural object-driven approach.</li>
+                                
+                                <br><br>
+                                
+                                <li>But SPOO doesn't stop there. What's on top is the fact that your app can be made available for the entire spoo userbase at a click of a button.</li>
+                                </ul>
+                               <br>
+                               <br>
+
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <span name="beyond" id="beyond"></span>
+                <div class="text-center" style=""  v-if="false">
+                    <h2><br><br><br>SPOO beyond the Cloud<br></h2>
+                    <h3>All the benefits of SPOO Cloud are also available on any other platform/infrastructure, even yours.<br><br></h3>
+                </div>
+                <br>
+                <div class="row " style="" v-if="false">
+                    <div class="col col-md-12 col-lg-12 text-center">
+                        <div class="m-5">
+                            <!--img src="https://vectr.com/marcoboelling/c3tF399dY3.png?width=350&height=200&select=a2MjNpi8x9" style="width:65%"-->
+                            <div class="row">
+                                <div class="col col-sm-4 col-sm-offset-2" style="margin-right:0px;">
+                                    <div class=" app-icon-landing" style="font-size: 22px;margin:0px;">
+                                        <div class="app-icon-xl"><em class="icon fa fa-code" style="font-size:77px"></em></div>
+                                        <br>
+                                        <br>
+                                        <h4>SPOO Framework</h4>
+                                        <br>
+                                        <h5>In the future, you'll be able to use the framework with your technologies, wherever you want.
+                                        <br>
+                                        <br>
+                                        <span class="text-shade"> (coming soon)</span></h5>
+                                    </div>
+                                </div>
+                                <div class=" col col-sm-4" style="margin-right:0px;">
+                                    <div class=" app-icon-landing" style="font-size: 22px;margin:0px;">
+                                        <div class="app-icon-xl"><em class="icon fa fa-thumbs-up" style="font-size:77px"></em></div>
+                                        <br>
+                                        <br>
+                                        <h4>Managed. For you.</h4>
+                                        <br>
+                                        <h5> You can also have a dedicated SPOO environment especially for you, even on your infrastructure, taylored for your technical needs.</h5>
+                                        <br>
+                                        <br>
+                                        <a class="btn btn-lg btn-fill btn- btn-success" href="../services"><b><span class="fa fa-hands-helping"></span> &nbsp; Learn more about our services</b></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-12">
+                <br>
+                <br>
+                <footer class="footer-demo " style="color:#414141;">
+                    <div class="container-expand">
+                        <nav class="pull-left">
+                            <ul>
+                                <!--li>
+                                            <a href="https://spoo-group.com">
+                                    spoo-group.com
+                                </a>
+                                        </li-->
+                                <li>
+                                    <a href="../privacy.html" target="_blank">
+                                   Privacy
+                                </a>
+                                </li>
+                                <li>
+                                    <a href="../privacy.html" target="_blank">
+                                    Imprint 
+                                </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="copyright pull-right">
+                            &copy; 2019, SPOO Technologies
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="main">
+            <div class="section-dark ">
+                <div class="container-expand">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+</body>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+<script src="../index.js"></script>
+<script src="../assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="../assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<script src="../bootstrap3/js/bootstrap.js" type="text/javascript"></script>
+<!--  Plugins -->
+<script src="../assets/js/ct-paper-checkbox.js"></script>
+<script src="../assets/js/ct-paper-radio.js"></script>
+<script src="../assets/js/bootstrap-select.js"></script>
+<script src="../assets/js/bootstrap-datepicker.js"></script>
+<script src="../assets/js/ct-paper.js"></script>
+
+</html>
