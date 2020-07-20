@@ -9,5 +9,5 @@
 - Extendable mapper system
 
 [SPOO Docs](/platform/Documentation.md)
-[Client SDK](/sdk/Documentation.md)
-[spoo.io](#spoo-cloud-sdk-javascript)
+[Client API](/sdk/Documentation.md)
+[Learn more](#spoo)

@@ -14,6 +14,15 @@ This quick example shows you how to spin up a platform with just a few lines of 
 
 #### Spin up a Platform
 
+
+> Install via npm:
+
+```shell
+npm i @spootechnologies/spoo
+```
+
+> Set up a platform:
+
 ```javascript
 // import the spoo and objy (spoo relys on objy for app development)
 const SPOO = require('@spootechnologies/spoo');
@@ -35,13 +44,13 @@ SPOO.REST({
 
 #### Set up a Client (SDK)
 
-Install via script tag:
+> Install via script tag:
 
 ```html
 <script src="spoo.js">
 ```
 
-or npm:
+> or npm:
 
 ```shell
 npm i spoo-client

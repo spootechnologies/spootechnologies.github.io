@@ -1,4 +1,4 @@
-# SPOO API Usage
+# SPOO Client API Usage
 
 
 For interacting with SPOO, we offer a **REST API** and a **JavaScript SDK**.
