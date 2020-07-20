@@ -1,12 +1,13 @@
-![logo](https://spoo.io/assets/img/spoo_icon_sm.png)
+![logo](shuttlecarrier.png)
 
-# SPOO Cloud SDK
+# SPOO - Single Point of Object
 
-> JavaScript client for SPOO Cloud
+> A framework for building platforms
 
-- Develop cloud applications using SPOO objects
-- Build a cloud backend for your applications
-- Turn real life use cases into modern applications
+- Quick setup
+- Simple object-driven programming
+- Extendable mapper system
 
-[Get Started](#spoo-cloud-sdk-javascript)
-[Documentation (JS + REST)](Documentation.md)
+[SPOO Docs](/platform/Documentation.md)
+[Client SDK](/sdk/Documentation.md)
+[spoo.io](#spoo-cloud-sdk-javascript)

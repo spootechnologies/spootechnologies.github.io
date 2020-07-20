@@ -1,70 +1,73 @@
-# SPOO Cloud SDK
+# SPOO 
 
-Official JavaScript SDK for SPOO Cloud (Beta)
-
-
-## Full Documentation
-
-Full documentation can be found in [Documentation.md](Documentation.md)
+Welcome to the SPOO Documentation Site. Here you'll find the docs for the SPOO framework as well as for the Client SDK.
 
 
-## Getting Started
+## Prequesits
 
-In order to develop on SPOO Cloud, you need a workspace. A workspace is an isolated space where all your data will live. Each tenant has it's own workspace.
-
-Go to [spoo.io/cloud](https://spoo.io/cloud) to create one!
+For setting up a SPOO platform, you need a JavaScript Runtime, like Node.js, Deno or Browsers.
 
 
-### Installing
+## Quick Example
 
-This SDK can be used in any JavaScript Environment. You can get in via npm or via spoo.io
+This quick example shows you how to spin up a platform with just a few lines of code.
 
-### Browser
-
-```html
-<script src="https://spoo.io/code/spoo-cloud.min.js"></script>
-```
-
-### NPM
+#### Spin up a Platform
 
 ```javascript
-npm install spoocloud-js
+// import the spoo and objy (spoo relys on objy for app development)
+const SPOO = require('@spootechnologies/spoo');
+const OBJY = rquire('@spootechnologies/objy');
+
+// define an "object family"
+SPOO.define({
+  name: "user",
+  pluralName: "users",
+  authable: true
+})
+
+// run the platform via REST
+SPOO.REST({
+  port:80,
+  ...
+}).run()
 ```
 
-This will be everything you need to get started.
+#### Set up a Client (SDK)
 
-## Quick Examples
+Install via script tag:
+
+```html
+<script src="spoo.js">
+```
+
+or npm:
+
+```shell
+npm i spoo-client
+```
+
+Authenticate and get some users:
+
+```javascript
+const spoo = new SPOO_Client().workspace('mytenant');
+
+spoo.io().auth("user", "pass", function(data, err){
+  if(!err) console.log('you are in!');
+})
+
+spoo.io().users({}).get(function(data, err){
+  if(!err) console.log('users:', data)
+})
+```
+
 
 Setting up the SDK and working with it really is't hard. The API ist designed as fluent interface. 
 
 All single calls are initialized with `spoo.io()`, after which methods can be chained.
 
 
-### Initialize
-
-```javascript
-// Initialize
-
-const SPOO_Client = require('spoocloud-js');
-
-var spoo = new SPOO_Client("superCompany").App("todoApp");
-
-```
-
-### Authenticate
-
-```javascript
-
-// Authenticate a user
-spoo.io().auth('peter.griffin', 'password', function(data, err)
-{
-  if(err) return console.error("Authentication failed");
-  console.log(data); // {...userdata...}
-}, true)
-
-```
-
-### Working with objects
+#### Working with objects
 
 ```javascript
 
@@ -99,29 +102,16 @@ spoo.io().Object("objectid...").addProperty({
 ```
 
 
-## Deploy to SPOO Cloud
-
-### Hosting
-
-Web Applications entirely build with client-side HTML/JavaScript/CSS can be uploaded and hosted on SPOO Cloud.
-
-Please refer to our [spoodev cli](https://www.npmjs.com/package/spoodev-cli) to learn how to upload applications.
-
-### App Store
-
-If you'd like to link your app to the App Store, login to [SPOO Console](https://spoo.io/console) and click the publish button in the upper right corner.
-
-
 ## Authors
 
 * **Marco Boelling** - *Initial work* - [Twitter](https://twitter.com/marcoboelling)
 
+
 ## License
 
-This project is licensed under the MIT License.
+SPOO is open source and licensed under the AGPL license.
 
 ## Further reading
 
 * For more information on SPOO, go to [spoo.io](https://spoo.io)
-* [SPOO on Medium](https://medium.com/spoo-io)
 
