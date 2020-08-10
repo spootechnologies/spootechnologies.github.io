@@ -1,6 +1,6 @@
 ![logo](shuttlecarrier.png)
 
-# SPOO - Single Point of Object
+# SPOO Docs
 
 > A framework for building platforms
 
