@@ -200,11 +200,16 @@
                                 <div class="main-card-label">SERVER</div>
                                 <br>
                                 <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:0px;font-size:19px" >SPOO.define({
-    name: "object", 
-    pluralName: "objects"
+    name: "user", 
+    pluralName: "users",
+    storage: new MongoMapper('localhost'),
+    authable: true
 })
 
-SPOO.REST().run()
+SPOO.REST({
+    port: 80,
+    redisCon: 'redis://localhost'
+}).run()
 </code></pre>
                             </div>
                         </div>
@@ -215,12 +220,15 @@ SPOO.REST().run()
                         <div class=" ">
                             <div class="main-card-label">CLIENT</div>
                             <pre style="font-size:15px;">
-                                    <code class="javascript" style="padding:0px;font-size:19px" >spoo.io().auth({
-    username: "peter",
-    password: "pass"
-});
+                                    <code class="javascript" style="padding:0px;font-size:19px" >spoo.io().auth("username", "password", 
+    (data, err) => {
+        console.log('authenticated!');
+    }
+);
 
-spoo.io().objects().get()
+spoo.io().users({}).get((data, err) => {
+    console.log(users)
+})
 </code></pre>
                         </div>
                     </div>
@@ -249,7 +257,7 @@ spoo.io().objects().get()
                                         <img src="assets/img/shuttlecarrier.png" style="max-width:80%">
                                         <br>
                                         <div class="app-icon-landing" style="text-align:left !important;">
-                                            <h4>A SPOO platform can be run in seconds, using small boilerplates</h4>
+                                            <h4>A SPOO platform can be run in minutes, using small code bases</h4>
                                         </div>
                                     </div>
                                 </div>
