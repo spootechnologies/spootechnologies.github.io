@@ -3,6 +3,13 @@ body {
     zoom : 60% !important;
 }
 
+.collaborator_avatar
+{
+    border-radius: 100px;
+    height: 40px;
+    width: 40px;
+}
+
 ::-webkit-input-placeholder
 {
  color: #616161 !important;

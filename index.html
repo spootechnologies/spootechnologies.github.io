@@ -197,15 +197,13 @@
                                 <div class="main-card-label">SERVER</div>
                                 <br>
                                 <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:0px;font-size:19px" >SPOO.define({
-    name: "user", 
-    pluralName: "users",
-    storage: new MongoMapper('localhost'),
-    authable: true
+    name: "object", 
+    pluralName: "objects",
+    storage: new MongoMapper('localhost')
 })
 
 SPOO.REST({
-    port: 80,
-    redisCon: 'redis://localhost'
+    port: 80
 }).run()
 </code></pre>
                             </div>
@@ -217,15 +215,15 @@ SPOO.REST({
                         <div class=" ">
                             <div class="main-card-label">CLIENT</div>
                             <pre style="font-size:15px;">
-                                    <code class="javascript" style="padding:0px;font-size:19px" >spoo.io().auth("username", "password", 
-    (data, err) => {
-        console.log('authenticated!');
-    }
-);
+                                    <code class="javascript" style="padding:0px;font-size:19px" >// Add an object
+spoo.io()
+    .object({name "hello world"})
+    .add((obj, err) => {})
 
-spoo.io().users({}).get((data, err) => {
-    console.log(users)
-})
+// Query objects
+spoo.io()
+    .objects({name: "hello world"})
+    .get((objs, err) => {})
 </code></pre>
                         </div>
                     </div>
@@ -380,13 +378,74 @@ spoo.io().users({}).get((data, err) => {
                                         <li>customer-facing projects</li>
                                     </ul>
                                     <br>
-                                    <a href="#">Talk to us</a>
+                                    <a href="mailto:info@spoo.io">Talk to us</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <br>
+            <br>
+            <br>
+            <!--br>
+            <br>
+            <br>
+
+
+            <div class="container-expand" id="ecosystem" name="ecosystem" >
+                <div class="">
+                    <center>
+                        <div class="main-header">Ecosystem</div>
+                    </center>
+                    <br>
+                    <center>
+                        <div class="row">
+                            <div class="col col-sm-10 col-sm-offset-1">
+                                <h4>
+                                    The SPOO Project contains of multiple projects as part of the ecosystem
+                                </h4>
+                            </div>
+                        </div>
+                    </center>
+                    <br>
+                    <br> <br>
+                    <div class="row text-center">
+                        <div class="col col-sm-3  text-left">
+                            <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
+                               
+                               
+                                <div class="app-icon-landing" style="text-align:left !important;">
+                                    <h5>SPOO Framework</h5>
+                                    The Core Framework
+                                    <br>
+                                    <br>
+                                    <a href="https://github.com/spootechnologies/spoo">Github</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-sm-3  text-left">
+                            <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
+                               
+                              
+                                <div class="app-icon-landing" style="text-align:left !important;">
+                                    <h5>SPOO JavaScript Client</h5>
+                                    The JS Client Library
+                                    <br>
+                                    <br>
+                                    <a href="https://github.com/spootechnologies/spooclient">Github</a>
+                                </div>
+                            </div>
+                        </div>
+
+                     
+                       
+                    </div>
+                </div>
+            </div-->
+
+
             <!--span id="why" name="why"></span>
             <div style="height:150px;display:block"></div>
             <center>
@@ -451,19 +510,22 @@ spoo.io().users({}).get((data, err) => {
                             <div class="row">
                                 <div class=" col col-sm-8 col-sm-offset-2">
                                     <div class="main-card text-left" style="background: #f3f3f3;box-shadow: none;min-height:auto ">
-                                        <h4>We are currently in private beta. SPOO will be available later this year.</h4>
-                                        <h5 style="font-weight:normal">
-                                            <br>
-                                            However, if you'd like to peek your head in early, sign up for that newsletter.
-                                        </h5>
+                                        <h4>Who's behind SPOO?</h4>
+                                        <br>
+                                        The SPOO project and ecosystem is an <u>open source</u> community effort. If you'd like to help improve SPOO, you are welcome to collaborate on <a target="_blank" href="https://github.com/spootechnologies">Github</a>.
+                                        <br><br>
+                                        There is a core team that is working full time on the SPOO ecosystem:
+                                        <br>
+
                                         <br>
                                         <div class="text-left p-5 " style="">
-                                            <form action="https://tinyletter.com/spooio" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/spooio', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
-                                                <input type="email" name="email" id="tlemail" class="form-control invert-control " style="width:60%;height:60px;max-width:700px;border-radius:100px;background: #e4e4e4;" placeholder="Enter your email"> &nbsp;
-                                                <input type="submit" value="Get me on the list" class="btn btn btn-round btn-fill btn-md btn-info"></input> &nbsp;
-                                            </form>
-                                            <br>
-                                            <p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p>
+                                           
+                                           <a href="https://twitter.com/marcoboelling" title="Marco Boelling, Initial Author and Project Lead"><img class="collaborator_avatar" src="https://avatars0.githubusercontent.com/u/53232140?s=60&v=4"></a>
+
+                                           <a href="https://twitter.com/theedgesofben" title="Ben Lotterer, Core Team"><img class="collaborator_avatar" src="https://avatars1.githubusercontent.com/u/6500037?s=96&v=4"></a>
+
+                                           <a href="https://github.com/C5H8NNaO4" title="Moritz Roessler, Core Team"><img class="collaborator_avatar" src="https://avatars0.githubusercontent.com/u/4706166?s=64&v=4"></a>
+
                                         </div>
                                     </div>
                                 </div>
