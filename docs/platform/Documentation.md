@@ -76,7 +76,7 @@ SPOO.define({
 
 ## Custom Mappers
 
-Every Object Family can have ...
+Every Object Wrapper can have custom plugged-in technologies for `persistence`, `processing` and `observing`
 
 
 ```javascript
@@ -85,7 +85,6 @@ SPOO.define({
   processor: new vm(""),
   observer: new interval() 
 })
-
 ````
 
 
@@ -99,21 +98,22 @@ SPOO.REST({
   port: 80, // The port to run on
   redisCon: "localhost", // The redis connection (for session storage)
 })
-
 ````
 
 
 ## Meta Mapper
 
-...
+> this is a must have!
+
+The Meta Mapper is a mapper to a MongoDB instance, that holds some basic information for the platform itself.
 
 
 ```javascript
 SPOO.REST({
-  port: 80, // The port to run on
-  redisCon: "localhost", // The redis connection (for session storage)
-})
-
+  ...
+  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
+  ...
+}).run()
 ````
 
 
