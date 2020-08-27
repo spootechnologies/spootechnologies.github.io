@@ -10,4 +10,4 @@
 
 [Create a platform](/platform/Documentation.md)
 [Build a client](/sdk/Documentation.md)
-[Learn more](#spoo)
+[Quickstart](#spoo)

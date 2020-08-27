@@ -1,5 +1,5 @@
 <!-- docs/_sidebar.md -->
 
-* [General](README.md)
-* [SPOO Platform](/platform/Documentation.md)
-* [Client API](/sdk/Documentation.md)
+* [Quickstart](README.md)
+* [Platform Docs](/platform/Documentation.md)
+* [Client Docs](/sdk/Documentation.md)

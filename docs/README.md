@@ -1,37 +1,31 @@
-# SPOO 
+# Quickstart 
 
 Welcome to the SPOO Documentation Site. Here you'll find the docs for the SPOO framework as well as for the Client SDK.
+The following quick examples show you how to spin up a platform and a client with just a few lines of code.
 
-
-## Prequesits
-
-For setting up a SPOO platform, you need a JavaScript Runtime, like Node.js, Deno or Browsers.
-
-
-## Quick Example
-
-This quick example shows you how to spin up a platform with just a few lines of code.
-
-#### Spin up a Platform
+# Spin up a Platform
 
 
 > Install via npm:
 
 ```shell
-npm i @spootechnologies/spoo
+npm i spoojs
 ```
-
-> Set up a platform:
 
 ```javascript
 // import the spoo and objy (spoo relys on objy for app development)
 const SPOO = require('spoojs');
 
-// define an "object family"
+// define some "object wrappers"
 SPOO.define({
   name: "user",
   pluralName: "users",
   authable: true
+})
+
+SPOO.define({
+  name: "object",
+  pluralName: "objects"
 })
 
 // run the platform via REST
@@ -41,46 +35,29 @@ SPOO.REST({
 }).run()
 ```
 
-#### Set up a Client (SDK)
+# Set up a Client (SDK)
 
-> Install via script tag:
+> Install via npm or script tag:
 
 ```html
 <script src="spoo.js">
 ```
 
-> or npm:
-
 ```shell
 npm i spoo-client
 ```
 
-Authenticate and get some users:
-
 ```javascript
+// 1. Initialize the client
 const spoo = new SPOO_Client().workspace('mytenant');
 
+// 2. Authenticate a user
 spoo.io().auth("user", "pass", function(data, err){
   if(!err) console.log('you are in!');
 })
 
-spoo.io().users({}).get(function(data, err){
-  if(!err) console.log('users:', data)
-})
-```
-
-
-Setting up the SDK and working with it really is't hard. The API ist designed as fluent interface. 
-
-All single calls are initialized with `spoo.io()`, after which methods can be chained.
-
-
-#### Working with objects
-
-```javascript
-
 // Add an object
-spoo.io().Object({
+spoo.io().object({
   name: "Mercedes",
   type: "car",
   properties: {
@@ -96,7 +73,7 @@ spoo.io().Object({
 })
 
 // Modify an object
-spoo.io().Object("objectid...").addProperty({
+spoo.io().object("objectid...").addProperty({
   color: {
     type: "shortText",
     value: "red"
@@ -106,7 +83,6 @@ spoo.io().Object("objectid...").addProperty({
   if(err) return console.error(err);
   console.log(data); // {...updated object...}
 })
-
 ```
 
 
