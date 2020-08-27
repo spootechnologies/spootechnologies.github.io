@@ -40,9 +40,7 @@ SPOO.define({
 // run the platform via REST
 SPOO.REST({
   port:80,
-  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
-  messageMapper: new SPOO.messageMappers.sendgridMapper().connect("2424")
-  ...
+  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost")
 }).run()
 ```
 
@@ -122,15 +120,14 @@ Any SPOO Platform can be deployed in different architectures and scales.
 
 
 * 1. Create a platform file (e.g. platform.js)
-* 2. include the dependencies (spoo, objy and the mapper catalog if needed)
+* 2. Define your platform
 * 3. Run the file
 
 
 #### Example Platform File (platform.js)
 
 ```javascript
-const SPOO = require('@spootechnologies/spoo');
-const OBJY = require('@spootechnologies/objy');
+const SPOO = require('spoo');
 
 SPOO.define({
   name: "user",
@@ -147,8 +144,6 @@ SPOO.REST().run()
 
 ```shell
 node platform.js
-# or
-deno run platform.js
 ```
 
 
