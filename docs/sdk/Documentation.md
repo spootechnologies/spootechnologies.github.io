@@ -18,7 +18,7 @@ APP | The App name, in which context operations will be made
 
 
 ```shell
-curl -X GET "https://spoo.io/api/client/<WORKSPACE>/app/<APP>"
+curl -X GET "URL.com/api/client/<WORKSPACE>/app/<APP>"
 
 ```
 
@@ -29,7 +29,7 @@ Get it from npm or via spoo.io
 
 
 ```html
-<script src="https://spoo.io/code/spoo-cloud.min.js"></script>
+<script src="URL.com/code/spoo-cloud.min.js"></script>
 ```
 
 or
@@ -63,7 +63,7 @@ refreshToken | Once an access token has expired, you can use the refresh token t
 > Authenticate a user
 
 ```shell
-curl -X POST "https://spoo.io/api/client/<YOUR CLIENT>/auth"
+curl -X POST "URL.com/api/client/<YOUR CLIENT>/auth"
   -D {
     "username" : "peter",
     "password" : "mysupersecretpass"
@@ -79,7 +79,6 @@ spoo.io().auth(
 	},true // "stay signed in"
 )
 ```
-
 
 
 In order to request your tokens, a user has to authenticate using the username and password.
@@ -149,7 +148,7 @@ or as query parameter:
 > Request a new access token
 
 ```shell
-curl -X POST "https://spoo.io/api/client/<YOUR CLIENT>/token"
+curl -X POST "URL.com/api/client/<YOUR CLIENT>/token"
   -D {
     "refreshToken" : "325nfdf89fn3-.235h8nd..."
   }
@@ -178,7 +177,7 @@ Refresh tokens can only be used once! Whenever you use it to get a new access to
 > Reject an access token
 
 ```shell
-curl -X POST "https://spoo.io/api/client/<YOUR CLIENT>/token/reject"
+curl -X POST "URL.com/api/client/<YOUR CLIENT>/token/reject"
   -D {
     "accessToken" : "325nfdf89fn3-.235h8nd..."
   }
@@ -210,7 +209,7 @@ You can have multiple applications connected to your client. An application is b
 
 
 ```shell
-curl -X POST "https://spoo.io/api/client/WORKSPACE/application"
+curl -X POST "URL.com/api/client/WORKSPACE/application"
   -D {
     "name" : "myapp", // This is the application identifier!
     "displayName": "My Fancy App" // This can be used to display a pretty name
@@ -231,7 +230,7 @@ new Client("WORKSPACE").Application({
 
 
 ```shell
-curl -X GET "https://spoo.io/api/client/WORKSPACE/applications"
+curl -X GET "URL.com/api/client/WORKSPACE/applications"
 ```
 
 
@@ -355,7 +354,7 @@ spoo.io().Files(...)
 
 ```shell
 # Works for /object, /template, /eventlog, /file, /user
-curl -X POST "https://spoo.io/api/client/<YOUR CLIENT>/app/<YOUR APP>/object"
+curl -X POST "URL.com/api/client/<YOUR CLIENT>/app/<YOUR APP>/object"
   -D {
     "name" : "my first object"
   }
@@ -394,7 +393,7 @@ The data you pass here, will be used to initialize the object structure. Attribu
 
 ```shell
 # Works for /objects, /templates, /eventlogs, /files, /users
-curl -X POST "https://spoo.io/api/client/<YOUR CLIENT>/app/<YOUR APP>/objects"
+curl -X POST "URL.com/api/client/<YOUR CLIENT>/app/<YOUR APP>/objects"
   -D [
   	{
     	"name" : "my first object"
@@ -456,7 +455,7 @@ spoo.io().Objects([
 
 ```shell
 # Works for /object, /template, /eventlog, /file, /user
-curl -X DELETE "https://spoo.io/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
+curl -X DELETE "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
 
 ```
 ```javascript
@@ -493,7 +492,7 @@ The following methods are used to alter an object at runtime. Every Operation re
 
 ```shell
 # Works for /object, /template, /file, /user
-curl -X PUT "https://spoo.io/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
+curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
 - D [
 	{ "setName" : ["my name"] },
 	{ "setType" : ["my type"] },
@@ -626,7 +625,7 @@ event | An event that will be observed by SPOO. Learn more below
 
 ```shell
 # Works for /object, /template, /user
-curl -X PUT "https://spoo.io/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
+curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
 - D [
   { "addProperty" : {"my prop": { "type": "shortText", "value": "hi there"}} },
   { "removeProperty" : ["someOtherProp"] },
@@ -655,7 +654,7 @@ Permissions can be added fro access control.
 
 ```shell
 # Works for /object, /template, /user
-curl -X PUT "https://spoo.io/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
+curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
 - D [
 	{ "setPropertyPermission" : ["my prop", {"privilegeName" : {"value" : "*"}}]},
 	{ "removePropertyPermission" : ["my prop", "plain_user"]},
@@ -683,7 +682,7 @@ Nested properties (bags) are accessed via dot notation.
 
 ```shell
 # Works for /object, /template, /user
-curl -X PUT "https://spoo.io/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
+curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
 - D [
 	{ "addProperty" : {"myBag.firstItem": { type: "shortText", value: "hi there"}} },
 	{ "setPropertyValue" : ["myBag.firstItem", "hello world"] }
@@ -760,7 +759,7 @@ Learn more about SPOO DSL below
 # Works for /object, /template, /eventlog, /user
 
 # Call an action
-curl -X POST "https://spoo.io/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e/property/myAction/call"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e/property/myAction/call"
 
 
 ```
@@ -817,7 +816,7 @@ An event can either be defined as **recurring** or **one time**.
 
 ```shell
 # Works for /object, /template, /user
-curl -X PUT "https://spoo.io/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
+curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
 - D [
 	{ "addProperty" : { "my first event": { type: "event", "date": "2018-02-21T14:14:41+00:00", "action" : "email('from', 'to', 'hi', 'i just happened')"}} },
 	
@@ -933,7 +932,7 @@ For property queries, use dot-notation to access single properties, e.g. `proper
 
 ```shell
 # Works for /objects, /templates, /eventlogs, /files, /users
-curl -X POST "https://spoo.io/api/client/myCompany/app/demoapp/objects?name=my object&type=/fir/&properties.myProp=/val/"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?name=my object&type=/fir/&properties.myProp=/val/"
 
 
 ```
@@ -976,7 +975,7 @@ properties.myProp | /val/ | Query for property "myProp" with "val" in it
 
 ```shell
 # Works for /objects, /templates, /eventlogs, /files, /users
-curl -X POST "https://spoo.io/api/client/myCompany/app/demoapp/objects?$query=$or: [{name : "my object"}, {name : "not my object"} ]}"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query=$or: [{name : "my object"}, {name : "not my object"} ]}"
 
 
 ```
@@ -1022,16 +1021,16 @@ $query | {$or: [{name : "my object"}, {name : "not my object"} ]} | Perform an O
 # Works for /objects, /templates, /eventlogs, /files, /users
 
 # simple query
-curl -X POST "https://spoo.io/api/client/myCompany/app/demoapp/objects?properties.myProp=my value"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?properties.myProp=my value"
 
 # complex query
-curl -X POST "https://spoo.io/api/client/myCompany/app/demoapp/objects?$query={'properties.myProp.value' : 'my value'}"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'properties.myProp.value' : 'my value'}"
 
 # simple nested query
-curl -X POST "https://spoo.io/api/client/myCompany/app/demoapp/objects?properties.myProp.firstItem=my value"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?properties.myProp.firstItem=my value"
 
 # complex nested query
-curl -X POST "https://spoo.io/api/client/myCompany/app/demoapp/objects?$query={'properties.myProp.properties.firstProp.value' : 'my value'}"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'properties.myProp.properties.firstProp.value' : 'my value'}"
 
 ```
 
@@ -1135,7 +1134,7 @@ Method | Description
 
 ```shell
 # Works for /object, /template, /user
-curl -X PUT "https://spoo.io/api/client/myCompany/app/demoapp/file"
+curl -X PUT "URL.com/api/client/myCompany/app/demoapp/file"
 - H "Content-Type : application/x-www-form-urlencoded"
 - F "file=@/path/to/file"
 - d {
@@ -1160,7 +1159,7 @@ spoo.io().File({data: formData, name : "my file"}).add(function(data, err)
 
 ```shell
 # Works for /object, /template, /user
-curl -X PUT "https://spoo.io/api/client/myCompany/app/demoapp/file/248her1928hrr3/data"
+curl -X PUT "URL.com/api/client/myCompany/app/demoapp/file/248her1928hrr3/data"
 - H "Content-Type : application/x-www-form-urlencoded"
 - F "file=@/path/to/file"
 ```
@@ -1182,7 +1181,7 @@ spoo.io().File("248her1928hrr3").Data(formData).upload(function(data, err)
 
 ```shell
 # Works for /object, /template, /user
-curl -X GET "https://spoo.io/api/client/myCompany/app/demoapp/file/248her1928hrr3/data?accessToken=35282hf8nf"
+curl -X GET "URL.com/api/client/myCompany/app/demoapp/file/248her1928hrr3/data?accessToken=35282hf8nf"
 ```
 
 ```javascript
@@ -1474,7 +1473,7 @@ Let's roll!
 > Step 1: Login
 
 ```shell
-curl "https://spoo.io/api/client/WORKSPACE/auth"
+curl "URL.com/api/client/WORKSPACE/auth"
   -D {
     "username" : "peter",
     "password" : "mysupersecretpass"
@@ -1531,7 +1530,7 @@ If you are using the REST API make sure to remember the accessToken!
 
 ```shell
 # Set application context to "todoApp" which will automatically create the application
-curl "https://spoo.io/api/client/WORKSPACE/app/todoApp/template"
+curl "URL.com/api/client/WORKSPACE/app/todoApp/template"
   -H "Authorisazion  Bearer 95u83 iomfg adf290...."
   -D {
 	"name" : "ToDo List Template",
@@ -1607,7 +1606,7 @@ In order to work in an application context, we'll just initialize you API/SDK wi
 > Step 3: Add ToDo List Object
 
 ```shell
-curl "https://spoo.io/api/client/WORKSPACE/app/todoApp/object"
+curl "URL.com/api/client/WORKSPACE/app/todoApp/object"
   -H "Authorisazion  Bearer 95u83 iomfg adf290...."
   -D {
 		"inherits" : ["5a8eeef4e1e1282f7d3121ed"] 
@@ -1673,7 +1672,7 @@ As a result, we'll get our freshly created ToDo List object with the necessary i
 > Step 3: Add Items to the List
 
 ```shell
-curl "https://spoo.io/api/client/WORKSPACE/app/todoApp/object/5a8eefd1e1e1282f7d3121ee"
+curl "URL.com/api/client/WORKSPACE/app/todoApp/object/5a8eefd1e1e1282f7d3121ee"
   -H "Authorisazion  Bearer 95u83 iomfg adf290...."
   -D [
   	{"addProperty" : {"items.tidyUp": { "type" : "boolean", "value" : false}}},
@@ -1749,7 +1748,7 @@ Each item is of type "boolean" so that we can tick them off.
 > Step 5: Tick off an Item
 
 ```shell
-curl "https://spoo.io/api/client/WORKSPACE/app/todoApp/object/5a8eefd1e1e1282f7d3121ee"
+curl "URL.com/api/client/WORKSPACE/app/todoApp/object/5a8eefd1e1e1282f7d3121ee"
   -H "Authorisazion  Bearer 95u83 iomfg adf290...."
   -D [
   	{"setPropertyValue" : ["items.tidyUp", true]}

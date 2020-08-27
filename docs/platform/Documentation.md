@@ -4,18 +4,11 @@ SPOO - Single Point of Object.
 
 ## Install
 
+A SPOO Platform runs on Node.js.
 
 ```javascript
-npm install @spootechnologies/spoo
+npm install spoojs
 ```
-
-## Run
-
-A SPOO Platform runs on JavaScript Runtimes, like Node.js or Deno.
-For Production Deployments, we have a few resources for running a platform on different systems.
-
-
-Learn more under [Deploy](#deploy)
 
 
 # Example Setup
@@ -30,11 +23,16 @@ Setting up a platform is fairly simple. Here is a simple example for a platform 
 // import the spoo and objy (spoo relys on objy for app development)
 const SPOO = require('spoojs');
 
-// define an "object family"
+// define some "object families"
 SPOO.define({
   name: "user",
   pluralName: "users",
   authable: true
+})
+
+SPOO.define({
+  name: "object",
+  pluralName: "objects"
 })
 
 // run the platform via REST
