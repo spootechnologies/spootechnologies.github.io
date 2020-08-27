@@ -13,10 +13,10 @@ npm i spoojs
 ```
 
 ```javascript
-// import the spoo and objy (spoo relys on objy for app development)
+// 1. import spoo
 const SPOO = require('spoojs');
 
-// define some "object wrappers"
+// 2. define some "object wrappers"
 SPOO.define({
   name: "user",
   pluralName: "users",
@@ -28,10 +28,10 @@ SPOO.define({
   pluralName: "objects"
 })
 
-// run the platform via REST
+// 3. run the platform via REST
 SPOO.REST({
   port:80,
-  ...
+  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost") // The matamapper is for basic config
 }).run()
 ```
 
