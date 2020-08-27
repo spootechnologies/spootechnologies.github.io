@@ -5,25 +5,23 @@ The following quick examples show you how to spin up a platform and a client wit
 
 # Spin up a Platform
 
-
-> Install via npm:
-
 ```shell
 npm i spoojs
 ```
 
 ```javascript
-// 1. import spoo
+// 1. import objy and spoo
+const OBJY = require('objy');
 const SPOO = require('spoojs');
 
 // 2. define some "object wrappers"
-SPOO.define({
+OBJY.define({
   name: "user",
   pluralName: "users",
   authable: true
 })
 
-SPOO.define({
+OBJY.define({
   name: "object",
   pluralName: "objects"
 })
@@ -31,6 +29,7 @@ SPOO.define({
 // 3. run the platform via REST
 SPOO.REST({
   port:80,
+  OBJY: OBJY,
   metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost") // The matamapper is for basic config
 }).run()
 ```
