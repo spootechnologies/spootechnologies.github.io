@@ -190,11 +190,23 @@
             </div>
             <div style="height:10px;display:block"></div>
             <div class="container-expand row">
-                <div class="col col-sm-6 top-buffer">
+                <div class="col col-sm-10 col-sm-offset-1 top-buffer">
                     <div class="bg-card">
                         <div class="row">
                             <div class="col col-sm-12 ">
-                                <div class="main-card-label">SERVER</div>
+                                <div class="main-card-label"><b>1. Install</b></div>
+                                <br>
+                                <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:0px;font-size:19px" >npm i spoojs
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-10 col-sm-offset-1 top-buffer">
+                    <div class="bg-card">
+                        <div class="row">
+                            <div class="col col-sm-12 ">
+                                <div class="main-card-label"><b>2. Define your server</b></div>
                                 <br>
                                 <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:0px;font-size:19px" >OBJY.define({
     name: "object", 
@@ -210,10 +222,10 @@ SPOO.REST({
                         </div>
                     </div>
                 </div>
-                <div class="col col-sm-6 top-buffer">
+                <div class="col col-sm-10 col-sm-offset-1 top-buffer">
                     <div class="bg-card ">
                         <div class=" ">
-                            <div class="main-card-label">CLIENT</div>
+                            <div class="main-card-label"><b>3. Access from a client</b></div>
                             <pre style="font-size:15px;">
                                     <code class="javascript" style="padding:0px;font-size:19px" >// Add an object
 spoo.io()
