@@ -28,8 +28,7 @@ Setting up a platform is fairly simple. Here is a simple example for a platform 
 
 ```javascript
 // import the spoo and objy (spoo relys on objy for app development)
-const SPOO = require('@spootechnologies/spoo');
-const OBJY = require('@spootechnologies/objy');
+const SPOO = require('spoojs');
 
 // define an "object family"
 SPOO.define({

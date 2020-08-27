@@ -25,8 +25,7 @@ npm i @spootechnologies/spoo
 
 ```javascript
 // import the spoo and objy (spoo relys on objy for app development)
-const SPOO = require('@spootechnologies/spoo');
-const OBJY = rquire('@spootechnologies/objy');
+const SPOO = require('spoojs');
 
 // define an "object family"
 SPOO.define({

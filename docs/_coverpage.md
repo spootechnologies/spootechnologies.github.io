@@ -8,6 +8,6 @@
 - Simple object-driven programming
 - Extendable mapper system
 
-[SPOO Platform](/platform/Documentation.md)
-[Client API](/sdk/Documentation.md)
+[Create a platform](/platform/Documentation.md)
+[Build a client](/sdk/Documentation.md)
 [Learn more](#spoo)
