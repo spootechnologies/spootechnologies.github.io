@@ -807,8 +807,6 @@ spoo.io().Object("5a818c47d3ere54a747bfa8e")
     "inherits": ["4iu9332423.423423"],
     "_id": "5a8e80d0e1e1282f7d3121e9",
     "name": "my name",
-    "onCreate": null,
-    "onDelete": null,
     "properties": 
     	{
     		"my first event": {
@@ -927,8 +925,6 @@ properties.myProp | /val/ | Query for property "myProp" with "val" in it
 ```shell
 # Works for /objects, /templates, /eventlogs, /files, /users
 curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query=$or: [{name : "my object"}, {name : "not my object"} ]}"
-
-
 ```
 ```javascript
 // Works for: Objects(), Templates(), EventLogs(), Users()
@@ -988,7 +984,6 @@ curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'properti
 ```javascript
 // Works for: Objects(), Templates(), EventLogs(), Users()
 
-
 // simple query
 spoo.io().Objects({"properties.myProp" : "my value"}).get(function(data, err)
 {
@@ -1042,45 +1037,13 @@ Complex Query | Description
 
 
 
-
-
 # Files
 
 
-Files are objects, that hold some file data. So a file object represents a file and has the following structure:
+Files are objects, that hold some file data.
 
 
-> File scheme
-
-```json
-{
-    "role": "file",
-    "type": null,
-    "applications": [],
-    "_id": "5a5f5987911fd920fd0ef799",
-    "name": null,
-    "onCreate": null,
-    "onDelete": null,
-    "permissions": {},
-    "data": null
-}
-```
-
-
-Method | Description 
---------- | --------
-`setName(name)` | Set the name of the file
-`setType(name)` | Set the type of the file
-`addApplication(applicationName)` | Bind the file to an application
-`removeApplication(applicationName)` | Remove an application from the file
-`setPermission({privilegeName : { value : permissionCodes }})` | Set permissions
-`removePermission(privilegeName)` | Remove a permission by privilege name
-`setOnCreate(DSLSnippet)` | Set the onCreate Listener's DSL Code Snippet
-`setOnChange(DSLSnippet)` | Set the onChange Listener's DSL Code Snippet
-`setOnDelete(DSLSnippet)` | Set the onDelete Listener's DSL Code Snippet
-
-
-## Upload a File
+> Upload a File
 
 
 ```shell
@@ -1106,27 +1069,6 @@ spoo.io().File({data: formData, name : "my file"}).add(function(data, err)
 })
 ```
 
-## Update a File 
-
-```shell
-# Works for /object, /template, /user
-curl -X PUT "URL.com/api/client/myCompany/app/demoapp/file/248her1928hrr3/data"
-- H "Content-Type : application/x-www-form-urlencoded"
-- F "file=@/path/to/file"
-```
-
-```javascript
-var formData = new FormData(); 
-var fileInput = document.getElementById('upload');
-var file = fileInput.files[0];
-formData.append("uploadfile", file);
-            
-spoo.io().File("248her1928hrr3").Data(formData).upload(function(data, err)
-{
-
-})
-```
-
 
 ## Get File
 
@@ -1143,8 +1085,6 @@ To get the file itself, the API offers a way to retrieve the path to the file.
 
 
 Important: When you are using the REST API, make sure to attach your access token in the Query String. This makes it easier to share a file link.
-
-
 
 
 
@@ -1251,138 +1191,6 @@ Whe you set up your client, your initial user will be a SPOO Admin.
 
 
 
-
-# SPOO DSL
-
-
-The SPOO DSL (Domain Specific Language) is an API that can be used in ***event listeners***, ***events*** and ***actions***. 
-
-It lets the system automatically execute object operations and connect to the outside world.
-
-<aside class="info">
-DSL Snippets will be executed asynchronous
-</aside>
-
-
-## General functions
-
-> Send an email
-
-```javascript
-dsl.email('Marco' , 'peter.griffin@whatever.com', 'hey, ' + dsl.user.username, 'how are you doing?')
-```
-
-> Make an HTTP call
-
-```javascript
-dsl.http('http://mysite.com/endpoint' , 'POST', {Accept : 'text/json'}, {message : 'how are you doing?'}')
-```
-
-
-## Add object(s)
-
-> Add an object
-
-```javascript
-// Works for Object(), Template(), User(), EventLog(), File()
-dsl.Object({name : 'my object'}).add()
-```
-
-> Add many objects
-
-```javascript
-// Works for Objects(), Templates(), Users(), EventLogs(), Files()
-dsl.Objects([{name : 'my first object'}, {name : 'my second object'}]).add()
-```
-
-
-## Delete an object
-
-> Delete an object
-
-```javascript
-// Works for Object(), Template(), User(), EventLog(), File()
-dsl.Object("392r932fm93fm90f").delete()
-```
-
-
-## Get an object
-
-> Get An Object
-
-```javascript
-// Works for Object(), Template(), User(), EventLog(), File()
-dsl.Object("392r932fm93fm90f").get(function(obj)
-{
-	// obj has the object
-})
-```
-
-
-## Modify an object
-
-> Modify an object
-
-```javascript
-// Works for Object(), Template(), User(), EventLog(), File()
-dsl.Object("392r932fm93fm90f").get(function(obj)
-{
-	obj.setName("my name")
-	.setType("my type")
-	.save()
-})
-```
-
-
-To modify an object, use the standard methods that you learned above. These can also be chained.
-To save your changes, call `save()` at the end.
-
-
-## Process objects (batch operations)
-
-In order to perform batch operations, use the processAll Method. Internally, this job will be parallelized for scalable execution. 
-
-> Process objects
-
-```javascript
-// Works for Object(), Template(), User(), EventLog(), File()
-dsl.Objects({query}).processAll(function(objs)
-{
-	// objs is an array that has the objects
-	objs.forEach(function(obj)
-	{
-		obj.setType("newtype").save();
-	})
-})
-```
-
-  
-
-
-## Access the calling object's data
-
-If you have an action, listener or event inside an object, you can always access that object inside your DSL.
-
-> How to access tha parent object:
-
-```javascript
-dsl.email(from, to, 'say my name', dsl.object.name) // get the object's name
-```
-
-> A more complex Example:
-
-```javascript
-// Let's assume, the following snippet lives inside an object's event
-// Get the first template, that this object extends and set it's name
-dsl.Template(dsl.object.inherits[0]).get(function(template)
-{
-	template.setName("my parent template").save()
-})
-```
-
-
-
-
 # Tutorials
 
 ## Overview
@@ -1390,7 +1198,6 @@ dsl.Template(dsl.object.inherits[0]).get(function(template)
 In order to learn how to develop with SPOO, we are providing some tutorials.
 
 - Tutorial 1: Build a ToDo App
-
 
 If you want to try the steps yourself, you can use ***Postman*** for the REST API, 
 or ***Plunkr*** for the JavaScript SDK.
@@ -1527,8 +1334,6 @@ spoo.io().Template({
     "inherits": [],
     "_id": "5a8eeef4e1e1282f7d3121ed",
     "name": "ToDo List Template",
-    "onCreate": null,
-    "onDelete": null,
     "properties": 
     {
         "items": {
@@ -1604,7 +1409,6 @@ spoo.io().Object({
     "privileges": {}
 }
 ```
-
 
 When we create a new ToDo list object, we want it to extend our ToDo List template.
 So all we have to do, is create an empty object with nothing but the `inherits` attribute. In there we're putting the id of the template.   
@@ -1757,4 +1561,3 @@ spoo.io().Object("5a8eefd1e1e1282f7d3121ee").setPropertyValue(
 
 
 Now, we'll tick off item "tidyUp". So we set that property's value to true.
-
