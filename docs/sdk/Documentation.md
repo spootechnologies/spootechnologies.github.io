@@ -1,7 +1,7 @@
 # SPOO Client API Usage
 
 
-For interacting with SPOO, we offer a **REST API** and a **JavaScript SDK**.
+For interacting with SPOO, there is a **REST API** and a **JavaScript SDK**.
 
 All API Methods can be accessed in the scope of a workspace and the application, that you are working with.
 
@@ -15,11 +15,8 @@ APP | The App name, in which context operations will be made
 ## REST API
 
 
-
-
 ```shell
 curl -X GET "URL.com/api/client/<WORKSPACE>/app/<APP>"
-
 ```
 
 
@@ -44,7 +41,7 @@ npm install spoocloud-js
 spoo = new SPOO_Client("WORKSPACE").App("APP");
 
 // Usage
-spoo.io().SomeFunction()
+spoo.io().//some api function
 ```
 
 
@@ -66,7 +63,8 @@ refreshToken | Once an access token has expired, you can use the refresh token t
 curl -X POST "URL.com/api/client/<YOUR CLIENT>/auth"
   -D {
     "username" : "peter",
-    "password" : "mysupersecretpass"
+    "password" : "mysupersecretpass",
+    "permanent": true // stay signed in
   }
 
 ```
@@ -92,8 +90,6 @@ As a result, three things will be returned:
 ```json
 {
 	"user": {
-		"uId" : "u58.afnfkafm", // the user ID
-		"cId" : "90jr902355-2.525", // a session ID
 		"client" : "myCompany", // client identifier
 		"username" : "peter.griffin", //username
 		"privileges": {		// privileges (user roles)
@@ -103,9 +99,9 @@ As a result, three things will be returned:
 				}
 			]
 		},
-		"spooAdmin" : false // superuser flag
+		"spooAdmin" : false // superuser flag (only available when user is spooAdmin)
 	},
-	"token":
+	"tokens":
 	{
 		"accessToken" : "95u83 iomfg adsf290....",
 		"refreshToken" : "93jfna8fh29n9f...."
@@ -113,22 +109,20 @@ As a result, three things will be returned:
 }
 
 ```
+
   
-  
-  
+
 **Using the access token:**
- 
+
   
 
 ***JavaScript SDK***
 
 <aside class="info">
 If you are using the JavaScript SDK, access token and refresh token will automatically be persisted locally. So that every call being made (after authentication) will have the access token attached to it.
-
 If you set the fourth parameter (stay signed in) to true, refreshing access tokens using your refresh tokens will be done automatically for you.
 </aside>
-  
-  
+
 ***REST API***
 
 <aside class="info">
@@ -263,16 +257,6 @@ To get a list of all connected applications in your client, use thow follwoing s
 
 
 Objects are the foundation of your applications. They represent entities, hold information, methods, listeners and events.
-There are 5 types of objects:
-
-Type | Description 
---------- | ------- 
-Object | A plain object that can be used to represent anything
-User | A special kind of object that represents a user. A user can login using it's credentials and has a set of privileges for access control
-Template | A Template encapsulates common information and functionality that can be reused in other object types
-EventLog | These are immutable objects that can be written once, but not altered. Perfekt for events or logs.
-File | A file is an object that holds a real file of any mimetype
-
 
 
 > Plain object schema
@@ -294,7 +278,7 @@ File | A file is an object that holds a real file of any mimetype
         }
      },
 
-     // USER AND TEMPLATE ONLY:
+     // USER ONLY:
      "username": null,
      "password": "neverShown",
      "privileges": {
@@ -302,9 +286,8 @@ File | A file is an object that holds a real file of any mimetype
      }
 
      //FILE ONLY:
-     "path": "/url/to/file"
+     "data": "/url/to/file"
 }
-
 ```
 
 
@@ -313,55 +296,30 @@ File | A file is an object that holds a real file of any mimetype
 Any one of these object types can be accessed individually or in groups
 
 ```shell
-
 spoo.io/.../object
 spoo.io/.../objects
-
-spoo.io/.../user
-spoo.io/.../users
-
-spoo.io/.../template
-spoo.io/.../templates
-
-spoo.io/.../eventlog
-spoo.io/.../eventlogs
-
-spoo.io/.../file
-spoo.io/.../files
 ```
 
 ```javascript
-
 spoo.io().Object(...)
 spoo.io().Objects(...)
 
 spoo.io().User(...)
 spoo.io().Users(...)
-
-spoo.io().Template(...)
-spoo.io().Templates(...)
-
-spoo.io().EventLog(...)
-spoo.io().EventLogs(...)
-
-spoo.io().File(...)
-spoo.io().Files(...)
-
 ```
 
 
 ## Add an object
 
 ```shell
-# Works for /object, /template, /eventlog, /file, /user
+# Works for any object wrapper, like /object, /template, /anything
 curl -X POST "URL.com/api/client/<YOUR CLIENT>/app/<YOUR APP>/object"
   -D {
     "name" : "my first object"
   }
-
 ```
 ```javascript
-// Works for: Object(), Template(), EventLog(), File(), User()
+// Works for any constructor, like: Object(), Template(), Anything()
 spoo.io().Object({name:"my first object"}).add(function(data, err) {
 })
 ```
@@ -376,8 +334,6 @@ spoo.io().Object({name:"my first object"}).add(function(data, err) {
      "inherits": [],
      "_id": "5a818c47d34ee54a747bfa8e",
      "name": "my first object",
-     "onCreate": null,
-     "onDelete": null,
      "properties": {},
      "permissions": {}
 }
@@ -392,7 +348,7 @@ The data you pass here, will be used to initialize the object structure. Attribu
 > Example
 
 ```shell
-# Works for /objects, /templates, /eventlogs, /files, /users
+# Works for any object wrapper, like /object, /template, /anything
 curl -X POST "URL.com/api/client/<YOUR CLIENT>/app/<YOUR APP>/objects"
   -D [
   	{
@@ -405,7 +361,7 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/app/<YOUR APP>/objects"
 
 ```
 ```javascript
-// Works for: Objects(), Templates(), EventLogs(), Files(), Users()
+// Works for any constructor, like: Object(), Template(), Anything()
 spoo.io().Objects([
   	{
     	"name" : "my first object"
@@ -474,8 +430,6 @@ spoo.io().Object("5a818c47d3ere54a747bfa8e").delete(function(data, err) {
      "inherits": [],
      "_id": "5a818c47d34ee54a747bfa8e",
      "name": "my first object",
-     "onCreate": null,
-     "onDelete": null,
      "properties": {},
      "permissions": {}
 }
@@ -500,9 +454,9 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 	{ "removeApplication" : ["otherapp"] },
 	{ "addInherit" : ["4iu9332423.423423"] },
 	{ "removeInherit" : ["3535343463463463.423423"] },
-	{ "setPermission" : [{admin": {"value" : "*"} }] },
+	{ "setPermission" : ["admin", {"value" : "*"}] },
 	{ "removePermission" : ["plain_user"] },
-	{ "setOnCreate" : ["email('from', 'to', 'hi', 'there')"] },
+	{ "setOnCreate" : ["sendEmail", "email('from', 'to', 'hi', 'there')"] },
 	{ "setOnDelete" : ["..."] }
 ]
 
@@ -516,9 +470,9 @@ spoo.io().Object("5a818c47d3ere54a747bfa8e")
 	.removeApplication("otherapp")
 	.addInherit("4iu9332423.423423")
 	.removeInherit("3535343463463463.423423")
-	.setPermission({admin : { value: "*"}})
+	.setPermission("admin", { value: "*"})
 	.removePermission("plain_user")
-	.setOnCreate("email('from', 'to', 'hi', 'there')")
+	.setOnCreate("sendEmail", "email('from', 'to', 'hi', 'there')")
 	.setOnDelete(null)
 	.save(function(data, err) {
 })
@@ -536,7 +490,9 @@ spoo.io().Object("5a818c47d3ere54a747bfa8e")
     "inherits": ["4iu9332423.423423"],
     "_id": "5a8e80d0e1e1282f7d3121e9",
     "name": "my name",
-    "onCreate": "email('from', 'to', 'hi', 'there')",
+    "onCreate": {
+      "sendEmail": "email('from', 'to', 'hi', 'there')",
+    },
     "onDelete": " ",
     "properties": {},
     "permissions": 
@@ -561,18 +517,15 @@ Method | Description
 `removeApplication(applicationName)` | Remove an application from the object
 `addInherit(templateId)` | Add a template to extend in this object
 `removeInherit(templateId)` | Remove an extended template
-`setPermission({privilegeName: { value: permissionCodes }})` | Set permissions
+`setPermission(privilegeName, { value: permissionCodes })` | Set permissions
 `removePermission(privilegeName)` | Remove a permission by privilege name
-`setOnCreate(DSLSnippet)` | Set the onCreate Listener's DSL Code Snippet
-`setOnChange(DSLSnippet)` | Set the onChange Listener's DSL Code Snippet
-`setOnDelete(DSLSnippet)` | Set the onDelete Listener's DSL Code Snippet
+`setOnCreate(name, DSLSnippet)` | Set the onCreate Listener's DSL Code Snippet
+`setOnChange(name, DSLSnippet)` | Set the onChange Listener's DSL Code Snippet
+`setOnDelete(name, DSLSnippet)` | Set the onDelete Listener's DSL Code Snippet
 ***User only methods*** | 
 `setUsername(username)` | Set the username of the user
 `setEmail(email)` | Set the email of the user
-`addPrivilege({"name" : "privilegeName"})` | Add a privilege
-`removePrivilege(privilegeName)` | Remove a privilege
-***Template only methods*** | 
-`addPrivilege({name : privilegeName})` | Add a privilege
+`addPrivilege(privilegeName)` | Add a privilege
 `removePrivilege(privilegeName)` | Remove a privilege
 
 
@@ -611,8 +564,6 @@ number | numeric value
 boolean | boolean value (true, false)
 date | An ISO 8601 date
 objectRef | A reference to another object
-userRef | A reference to a user
-fileRef | A reference to a file
 bag | A bag of nested properties. Here you can nest properties of any other type (even bags for deeper nesting). Bags don't have the "value" field, but "properties" instead
 action | An action that can be called. This holds a SPOO DSL Snippet
 event | An event that will be observed by SPOO. Learn more below
@@ -627,7 +578,7 @@ event | An event that will be observed by SPOO. Learn more below
 # Works for /object, /template, /user
 curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747bfa8e"
 - D [
-  { "addProperty" : {"my prop": { "type": "shortText", "value": "hi there"}} },
+  { "addProperty" : ["my prop", { "type": "shortText", "value": "hi there"}} ],
   { "removeProperty" : ["someOtherProp"] },
   { "setPropertyValue" : ["my prop", "hello world"] }
 ]
@@ -636,7 +587,7 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 ```javascript
 // Works for: Object(), Template(), User()
 spoo.io().Object("5a818c47d3ere54a747bfa8e")
-  .addProperty({"my prop": { type: "shortText", value: "hi there"}})
+  .addProperty("my prop", { type: "shortText", value: "hi there"})
   .removeProperty("someOtherProp")
   .setPropertyValue("my prop", "hello world")
   .save(function(data, err) {
@@ -1208,7 +1159,7 @@ Access Control lets you manage what a user can do with an object. For it to work
 Privileges are labels that can be attached to user objects. Like "admin" or "simple_user".
 You are free to name these labels.
 
-  
+
  On the other side, the object side, permissions can be modeled by mapping user privileges to a set of permissions codes. Like "admin" : "r" (A user with the "admin" privilege can read this ressource)
 
 
@@ -1344,7 +1295,7 @@ dsl.Object({name : 'my object'}).add()
 dsl.Objects([{name : 'my first object'}, {name : 'my second object'}]).add()
 ```
 
- 
+
 ## Delete an object
 
 > Delete an object
@@ -1662,7 +1613,7 @@ So all we have to do, is create an empty object with nothing but the `inherits` 
 Remember that inherits is an array!
 
   
-  
+
 As a result, we'll get our freshly created ToDo List object with the necessary information inherited from the template.
 
 
