@@ -92,7 +92,7 @@ spoo.io().object("objectid...").addProperty({
 
 ## License
 
-SPOO is open source and licensed under the AGPL license.
+SPOO is open source and licensed under the GNU Affero General Public License.
 
 ## Further reading
 
