@@ -11,17 +11,16 @@ npm i spoojs
 
 ```javascript
 // 1. import objy and spoo
-const OBJY = require('objy');
 const SPOO = require('spoojs');
 
 // 2. define some "object wrappers"
-OBJY.define({
+SPOO.OBJY.define({
   name: "user",
   pluralName: "users",
   authable: true
 })
 
-OBJY.define({
+SPOO.OBJY.define({
   name: "object",
   pluralName: "objects"
 })

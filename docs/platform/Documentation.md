@@ -21,17 +21,16 @@ Setting up a platform is fairly simple. Here is a simple example for a platform 
 
 ```javascript
 // import the spoo and objy (spoo relys on objy for app development)
-const OBJY = require('objy');
 const SPOO = require('spoojs');
 
 // define some "object families"
-OBJY.define({
+SPOO.OBJY.define({
   name: "user",
   pluralName: "users",
   authable: true
 })
 
-OBJY.define({
+SPOO.OBJY.define({
   name: "object",
   pluralName: "objects"
 })
@@ -52,7 +51,7 @@ Object families are ...
 
 
 ```javascript
-OBJY.define({
+SPOO.OBJY.define({
 
   // needed params:
   name: "template", // the singular name for single object access
@@ -77,7 +76,7 @@ Every Object Wrapper can have custom plugged-in technologies for `persistence`, 
 
 
 ```javascript
-OBJY.define({
+SPOO.OBJY.define({
   storage: new mongo("..."),
   processor: new vm(""),
   observer: new interval() 
@@ -127,10 +126,9 @@ Any SPOO Platform can be deployed in different architectures and scales.
 #### Example Platform File (platform.js)
 
 ```javascript
-const OBJY = require('objy');
 const SPOO = require('spoo');
 
-OBJY.define({
+SPOO.OBJY.define({
   name: "user",
   pluralName: "users",
   authable: true
