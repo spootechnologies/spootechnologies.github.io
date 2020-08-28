@@ -1088,7 +1088,7 @@ Important: When you are using the REST API, make sure to attach your access toke
 
 
 
-# Permissions
+# Access Control 
 
 
 Access Control lets you manage what a user can do with an object. For it to work, you need two things, that are mapped together:
