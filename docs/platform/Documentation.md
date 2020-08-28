@@ -7,9 +7,10 @@ SPOO - Single Point of Object.
 A SPOO Platform runs on Node.js.
 
 ```javascript
-npm install spoojs
+npm i spoojs
 ```
 
+> For running a platform your will also need Redis and MongoDB
 
 # Example Setup
 
@@ -20,7 +21,7 @@ Setting up a platform is fairly simple. Here is a simple example for a platform 
 
 
 ```javascript
-// import the spoo and objy (spoo relys on objy for app development)
+// import spoo
 const SPOO = require('spoojs');
 
 // define some "object families"
@@ -43,12 +44,31 @@ SPOO.REST({
 }).run()
 ```
 
-# Functionalities
+
+# API Basics
+
+Once your platform is up and running, you should try some basics, like creating a workspace and registering a user.
+
+## REST Interface
+
+The REST Interface is the default interface in SPOO. It spins up an express server, that has all the required SPOO routes ready.
+
+```javascript
+SPOO.REST({
+  port: 80, // The port to run on
+  redisCon: "localhost", // The redis connection (for session storage)
+})
+````
+
+This will splin up the API at `/api`:
+
+```curl
+HOST/api
+```
 
 ## Object Families
 
-Object families are ...
-
+Object families are wrappers for different kinds of objects. 
 
 ```javascript
 SPOO.OBJY.define({
@@ -69,8 +89,7 @@ SPOO.OBJY.define({
 
 ````
 
-
-## Custom Mappers
+### Custom Mappers
 
 Every Object Wrapper can have custom plugged-in technologies for `persistence`, `processing` and `observing`
 
@@ -84,24 +103,55 @@ SPOO.OBJY.define({
 ````
 
 
-## REST Interface
+## Workspaces
 
-The REST Interface is the default interface in SPOO. It spins up an express server, that has all the required SPOO routes ready.
+For ***multitenancy***, any SPOO Platform can have multiple workspaces. Each workspace is an isolated space for each tenant.
 
+The workspace registration feature is enabled by default, but can be changed with:
 
 ```javascript
-SPOO.REST({
-  port: 80, // The port to run on
-  redisCon: "localhost", // The redis connection (for session storage)
+SPOO.allowClientRegistrations = true | false
+```
+
+### Create a workspace
+
+Creating a workspace is done in two steps:
+
+1. Get a registration key via email
+```curl
+POST HOST/api/client/register {email: "YOUR EMAIL"}
+```
+
+2. Register a workspace with tat key
+```curl
+POST HOST/api/client {registrationKey: "KEY", clientname: "YOUR WORKSPACE NAME"}
+```
+
+## User accounts
+
+User accounts are defined using an object wrapper with the `authable` flag set to `true`
+
+```javascript
+SPOO.OBJY.define({
+   name: "user",
+   pluralName: "users",
+   authable: true
 })
-````
+```
+
+### Register a user
+
+This feature is enabled by default and can be changed with:
+
+```javascript
+SPOO.allowUserRegistrations = true | false
+```
+TO BE DOCUMENTED... (coming soon)
 
 
 ## Meta Mapper
 
-> this is a must have!
-
-The Meta Mapper is a mapper to a MongoDB instance, that holds some basic information for the platform itself.
+The Meta Mapper is a mapper to a MongoDB instance, that holds some basic information for the platform itself. It is used for things like storing workspace information or temporary registrations keys.
 
 
 ```javascript
@@ -139,7 +189,6 @@ SPOO.REST({
   OBJY: OBJY,
 }).run()
 ```
-
 
 
 ## Command Line
