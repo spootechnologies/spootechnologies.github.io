@@ -1,7 +1,11 @@
 # Quickstart 
 
-Welcome to the SPOO Documentation Site. Here you'll find the docs for the SPOO framework as well as for the Client SDK.
+Welcome to the SPOO Documentation Site. Here you'll find the docs for the SPOO framework as well as for the JS Client SDK and REST API.
 The following quick examples show you how to spin up a platform and a client with just a few lines of code.
+
+![Platform](https://spoo.io/assets/img/platform.png)
+
+> For running a basic platform you will need ***Node.js***, ***Redis*** and ***MongoDB***
 
 # Spin up a Platform
 
@@ -10,7 +14,7 @@ npm i spoojs
 ```
 
 ```javascript
-// 1. import objy and spoo
+// 1. import spoo
 const SPOO = require('spoojs');
 
 // 2. define some "object wrappers"
@@ -28,7 +32,6 @@ SPOO.OBJY.define({
 // 3. run the platform via REST
 SPOO.REST({
   port:80,
-  OBJY: OBJY,
   metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost") // The matamapper is for basic config
 }).run()
 ```
@@ -40,14 +43,14 @@ SPOO.REST({
 ```html
 <script src="spoo.js">
 ```
-
+or
 ```shell
 npm i spoo-client
 ```
 
 ```javascript
 // 1. Initialize the client
-const spoo = new SPOO_Client().workspace('mytenant');
+const spoo = new SPOO_Client('mytenant');
 
 // 2. Authenticate a user
 spoo.io().auth("user", "pass", function(data, err){
@@ -91,7 +94,7 @@ spoo.io().object("objectid...").addProperty({
 
 ## License
 
-SPOO is open source and licensed under the AGPL license.
+SPOO is open source and licensed under the GNU Affero General Public License.
 
 ## Further reading
 
