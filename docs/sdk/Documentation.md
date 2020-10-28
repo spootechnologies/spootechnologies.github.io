@@ -456,7 +456,7 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 	{ "removeInherit" : ["3535343463463463.423423"] },
 	{ "setPermission" : ["admin", {"value" : "*"}] },
 	{ "removePermission" : ["plain_user"] },
-	{ "setOnCreate" : ["sendEmail", "email('from', 'to', 'hi', 'there')"] },
+	{ "setOnCreate" : ["sendEmail", {"value: "email('from', 'to', 'hi', 'there')"}] },
 	{ "setOnDelete" : ["..."] }
 ]
 
@@ -472,8 +472,7 @@ spoo.io().Object("5a818c47d3ere54a747bfa8e")
 	.removeInherit("3535343463463463.423423")
 	.setPermission("admin", { value: "*"})
 	.removePermission("plain_user")
-	.setOnCreate("sendEmail", "email('from', 'to', 'hi', 'there')")
-	.setOnDelete(null)
+	.setOnCreate("sendEmail", {value: "email('from', 'to', 'hi', 'there')"})
 	.save(function(data, err) {
 })
 ```
@@ -491,9 +490,10 @@ spoo.io().Object("5a818c47d3ere54a747bfa8e")
     "_id": "5a8e80d0e1e1282f7d3121e9",
     "name": "my name",
     "onCreate": {
-      "sendEmail": "email('from', 'to', 'hi', 'there')",
+      "sendEmail": {
+        "value": "email('from', 'to', 'hi', 'there')"
+      }
     },
-    "onDelete": " ",
     "properties": {},
     "permissions": 
     {
