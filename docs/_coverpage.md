@@ -8,6 +8,6 @@
 - Simple object-driven programming
 - Extendable mapper system
 
-[Create a platform](/platform/Documentation.md)
-[Build a client](/sdk/Documentation.md)
+[Server Docs](/platform/Documentation.md)
+[Client Docs](/sdk/Documentation.md)
 [Quickstart](#quickstart)
