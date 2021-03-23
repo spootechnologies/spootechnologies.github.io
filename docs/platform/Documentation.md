@@ -25,13 +25,13 @@ Setting up a platform is fairly simple. Here is a simple example for a platform 
 const SPOO = require('spoojs');
 
 // define some "object families"
-SPOO.OBJY.define({
+SPOO.define({
   name: "user",
   pluralName: "users",
   authable: true
 })
 
-SPOO.OBJY.define({
+SPOO.define({
   name: "object",
   pluralName: "objects"
 })
@@ -39,7 +39,6 @@ SPOO.OBJY.define({
 // run the platform via REST
 SPOO.REST({
   port:80,
-  OBJY: OBJY,
   metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost")
 }).run()
 ```
@@ -71,7 +70,7 @@ HOST/api
 Object families are wrappers for different kinds of objects. 
 
 ```javascript
-SPOO.OBJY.define({
+SPOO.define({
 
   // needed params:
   name: "template", // the singular name for single object access
@@ -95,7 +94,7 @@ Every Object Wrapper can have custom plugged-in technologies for `persistence`, 
 
 
 ```javascript
-SPOO.OBJY.define({
+SPOO.define({
   storage: new mongo("..."),
   processor: new vm(""),
   observer: new interval() 
@@ -132,7 +131,7 @@ POST HOST/api/client {registrationKey: "KEY", clientname: "YOUR WORKSPACE NAME"}
 User accounts are defined using an object wrapper with the `authable` flag set to `true`
 
 ```javascript
-SPOO.OBJY.define({
+SPOO.define({
    name: "user",
    pluralName: "users",
    authable: true
@@ -178,15 +177,14 @@ Any SPOO Platform can be deployed in different architectures and scales.
 ```javascript
 const SPOO = require('spoo');
 
-SPOO.OBJY.define({
+SPOO.define({
   name: "user",
   pluralName: "users",
   authable: true
 })
 
 SPOO.REST({
-  port: 80,
-  OBJY: OBJY,
+  port: 80
 }).run()
 ```
 

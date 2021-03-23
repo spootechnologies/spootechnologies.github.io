@@ -18,13 +18,13 @@ npm i spoojs
 const SPOO = require('spoojs');
 
 // 2. define some "object wrappers"
-SPOO.OBJY.define({
+SPOO.define({
   name: "user",
   pluralName: "users",
   authable: true
 })
 
-SPOO.OBJY.define({
+SPOO.define({
   name: "object",
   pluralName: "objects"
 })

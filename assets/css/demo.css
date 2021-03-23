@@ -103,6 +103,11 @@ body {
     column-gap: 1em;
 }
 
+.masonry-5 { /* Masonry container */
+    column-count: 5;
+    column-gap: 1em;
+}
+
 .masonry-item { /* Masonry bricks or child elements */
     
     display: inline-table;

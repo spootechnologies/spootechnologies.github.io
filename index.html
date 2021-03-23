@@ -178,7 +178,7 @@
                                 </span>
                                 <br>
                                 <h3 style="font-size:40px;color:#888888">
-                                    Don't pick a platform, build YOUR platform. Exactly like you need it, taylored for your industry. Use <a href="https://objy.io" target="_blank">OBJY</a> as your simple progamming model.
+                                    Don't pick a platform, build YOUR platform. Exactly like you need it, taylored for your industry. Use <a href="https://objy.io" target="_blank">behaviour-driven objects</a> as your simple progamming model.
                                 </h3>
                                 <br>
                                 <br>
@@ -218,10 +218,12 @@
                             <div class="col col-sm-12 ">
                                 <div class="main-card-label"><b>2. Define your server</b></div>
                                 <br>
-                                <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:0px;font-size:19px" >SPOO.OBJY.define({
+                                <pre v-show="dev_code_example=='anatomy'" style="font-size:15px;"><code class="javascript" style="padding:0px;font-size:19px" >const SPOO = require('spoojs');
+
+SPOO.define({
     name: "object", 
     pluralName: "objects",
-    storage: new MongoMapper('localhost')
+    storage: new MongoMapper('localhost').connect()
 })
 
 SPOO.REST({
@@ -265,76 +267,55 @@ spoo.io()
                             </div>
                             <br>
                             <br>
-                            <div class="masonry-3 ">
+                            <div class="">
                                 <div class="masonry-item text-left">
                                     <div class="bg-card">
-                                        <div class="main-card-label">READY-TO-GO</div>
-                                        <br>
-                                        <br>
-                                        <img src="assets/img/shuttlecarrier.png" style="max-width:80%">
+                                        <div class="main-card-label">READY-TO-GO, READY-TO-USE</div>
+                                        
                                         <br>
                                         <div class="app-icon-landing" style="text-align:left !important;">
-                                            <h4>A SPOO platform can be run in minutes, using small code bases</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="masonry-item text-left  ">
-                                    <div class="bg-card">
-                                        <div class="main-card-label">PLATFORM CAPABILITIES</div>
-                                        <br>
-                                        <br>
-                                        <img src="icons/database-smart.png" style="max-width:40%">
-                                        <br>
-                                        <div class="app-icon-landing" style="text-align:left !important;">
-                                            <h4>SPOO brings everything, a platform needs. Like multitenancy, application contexts, data sharing and more</h4>
+                                            A SPOO platform can be run in minutes, using small code bases and comes with everything, a platform needs
                                         </div>
                                     </div>
                                 </div>
                                 <div class="masonry-item text-left">
                                     <div class="bg-card">
                                         <div class="main-card-label">ANY INFRASTRUCTURE, ANY SCALE</div>
-                                        <br>
-                                        <br>
-                                        <img src="icons/extend.png" style="max-width:40%">
+                                       
+                                        
                                         <br>
                                         <div class="app-icon-landing" style="text-align:left !important;">
-                                            <h4>SPOO is written in JavaScript, meaning it can run on pretty much any platform. From single servers to big k8s clusters.</h4>
+                                            SPOO is written in JavaScript and runs on pretty much any platform. From single servers to cloud
                                         </div>
                                     </div>
                                 </div>
                                 <div class="masonry-item text-left  ">
                                     <div class="bg-card">
                                         <div class="main-card-label">USER MANAGEMENT, ACCESS CONTROL</div>
-                                        <br>
-                                        <br>
-                                        <img src="icons/anywhere.png" style="max-width:40%">
+                                       
                                         <br>
                                         <div class="app-icon-landing" style="text-align:left !important;">
-                                            <h4>Giving users the ability to register, login, change passwords, all the usual stuff, ist already built-in.</h4>
+                                            Giving users the ability to register, login, change passwords, all the usual stuff, is already built-in.
                                         </div>
                                     </div>
                                 </div>
                                 <div class="masonry-item text-left">
                                     <div class="bg-card">
                                         <div class="main-card-label">SIMPLE PROGRAMMING</div>
-                                        <br>
-                                        <br>
-                                        <img src="objylogo.png" style="max-width:40%">
+                                       
                                         <br>
                                         <div class="app-icon-landing" style="text-align:left !important;">
-                                            <h4>SPOO runs on OBJY and uses dynamic, behaviour-driven objects as it's main piece of abstraction</h4>
+                                            SPOO runs on OBJY and uses dynamic, behaviour-driven objects as it's main piece of abstraction
                                         </div>
                                     </div>
                                 </div>
                                 <div class="masonry-item text-left">
                                     <div class="bg-card">
                                         <div class="main-card-label">ADJUSTABLE, EXTENDABLE</div>
-                                        <br>
-                                        <br>
-                                        <img src="icons/combine.png" style="max-width:70%">
+                                                                               
                                         <br>
                                         <div class="app-icon-landing" style="text-align:left !important;">
-                                            <h4>Make it your platform! Plug-in third party systems, databases or services natively, using our mapper system.</h4>
+                                            Make it your platform! Plug-in third party systems, databases or services natively, using our mapper system.
                                         </div>
                                     </div>
                                 </div>
@@ -369,38 +350,29 @@ spoo.io()
                     <div class="row text-center">
                         <div class="col col-sm-4 col-sm-offset-2 text-left">
                             <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
-                                <div class="main-card-label">FREE</div>
+                                <div class="main-card-label"><b><u>FREE</u></b> for non-commercial use</div>
                                 <br>
                                 <br>
                                 <div><em class="icon fa fa-code" style="font-size:55px"></em></div>
                                 <br>
                                 <div class="app-icon-landing" style="text-align:left !important;">
-                                    <h3>non-commercial use</h3>
-                                    <ul>
-                                        <li>personal projects</li>
-                                        <li>non-commercial projects</li>
-                                        <li>internal usage</li>
-                                    </ul>
-                                    <br>
-                                    <a class="btn btn-primary" href="https://github.com/spootechnologies"><b>Get started on Github now</b></a>
+                                    
+                                  
+                                    <a class="btn btn-primary" href="https://github.com/spootechnologies"><b>Get started on Github</b></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-sm-4 text-left">
                             <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
-                                <div class="main-card-label">COMMERCIAL</div><br>
+                                <div class="main-card-label"><b><u>LICENSED</u></b> for commercial use</div><br>
                                 <!--img src="assets/img/spoo-cloud.png" style="max-width:90%"-->
                                 <br>
                                 <div><em class="icon fa fa-dollar-sign" style="font-size:55px"></em></div>
                                 <br>
                                 <div class="app-icon-landing" style="text-align:left !important;">
-                                    <h3>commercial use</h3>
-                                    <ul>
-                                        <li>commercial projects</li>
-                                        <li>customer-facing projects</li>
-                                    </ul>
-                                    <br>
-                                    <a href="mailto:info@spoo.io">Talk to us</a>
+                                    
+                                  
+                                    <a class="btn btn-primary" href="mailto:info@spoo.io">Talk to us</a>
                                 </div>
                             </div>
                         </div>
@@ -408,120 +380,10 @@ spoo.io()
                 </div>
             </div>
 
+          
             <br>
-            <br>
-            <br>
-            <!--br>
-            <br>
-            <br>
-
-
-            <div class="container-expand" id="ecosystem" name="ecosystem" >
-                <div class="">
-                    <center>
-                        <div class="main-header">Ecosystem</div>
-                    </center>
-                    <br>
-                    <center>
-                        <div class="row">
-                            <div class="col col-sm-10 col-sm-offset-1">
-                                <h4>
-                                    The SPOO Project contains of multiple projects as part of the ecosystem
-                                </h4>
-                            </div>
-                        </div>
-                    </center>
-                    <br>
-                    <br> <br>
-                    <div class="row text-center">
-                        <div class="col col-sm-3  text-left">
-                            <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
-                               
-                               
-                                <div class="app-icon-landing" style="text-align:left !important;">
-                                    <h5>SPOO Framework</h5>
-                                    The Core Framework
-                                    <br>
-                                    <br>
-                                    <a href="https://github.com/spootechnologies/spoo">Github</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-sm-3  text-left">
-                            <div class="main-card text-center" style="    background: rgb(43, 43, 43); color: #FFFFFF;">
-                               
-                              
-                                <div class="app-icon-landing" style="text-align:left !important;">
-                                    <h5>SPOO JavaScript Client</h5>
-                                    The JS Client Library
-                                    <br>
-                                    <br>
-                                    <a href="https://github.com/spootechnologies/spooclient">Github</a>
-                                </div>
-                            </div>
-                        </div>
-
-                     
-                       
-                    </div>
-                </div>
-            </div-->
-
-
-            <!--span id="why" name="why"></span>
-            <div style="height:150px;display:block"></div>
-            <center>
-                <div class="main-header">Why SPOO?<br><br>
-                </div>
-            </center>
-            <div class="container-expand">
-                <div class="row bg-card">
-                    <div class="col col-sm-4 top-buffer">
-                        <div class="bg-card ">
-                            <div class="main-card-label text-center">EVERYWHERE, AT ANY SCALE</div>
-                            <br>
-                            <br>
-                            <center>
-                                <img src="icons/database.png" style="max-width:40%">
-                            </center>
-                            <br>
-                            <h3 style="font-size:25px;color:#888888"><b>Any infrastructure</b> <br><br>
-                                SPOO is built in JavaScript an can be run in different scenarios:<br> <br>
-                                Node.js, Browser, Docker, Kubernetes. Single instance or clustered.
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="col col-sm-4 top-buffer">
-                        <div class="bg-card">
-                            <div class="main-card-label text-center">VERSATILE AND EASY</div>
-                            <br>
-                            <br>
-                            <center>
-                                <img src="icons/hula-hoop.png" style="max-width:40%">
-                            </center>
-                            <br>
-                            <h3 style="font-size:25px;color:#888888"><b>Developing is simple</b> <br><br>
-                                Building with SPOO is done through a simeple, but versatile programming interface, using standard technoligies, like JavaScript or REST
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="col col-sm-4 top-buffer">
-                        <div class="bg-card ">
-                            <div class="main-card-label text-center">ADJUSTABLE</div>
-                            <br>
-                            <br>
-                            <center>
-                                <img src="icons/puzzle.png" style="max-width:40%">
-                            </center>
-                            <br>
-                            <h3 style="font-size:25px;color:#888888"><b>Build it like you need it</b> <br><br>
-                                Simply adjust or extend your SPOO environment with just the right technologies to perfectly meet the requirements of your industry.
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div-->
-            <div style="height:150px;display:block"></div>
+           
+            <div style="height:100px;display:block"></div>
             <br>
         </div>
         <div class="main">
@@ -552,8 +414,7 @@ spoo.io()
                                     </div>
                                 </div>
                             </div>
-                            <br>
-                            <br>
+                           
                             <br>
                         </div>
                         <br>
@@ -577,12 +438,9 @@ spoo.io()
                                         </ul>
                                     </nav>
                                     <div class="copyright pull-right">
-                                        &copy; 2020, SPOO Technologies
+                                        &copy; 2021, SPOO Technologies
                                     </div>
-                                    <br>
-                                    <center>
-                                        Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0</a>
-                                    </center>
+                                   
                                 </div>
                             </footer>
                         </div>
