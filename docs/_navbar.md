@@ -1,5 +1,6 @@
 <!-- docs/_sidebar.md -->
 
 * [Quickstart](README.md)
-* [Platform Docs](/platform/Documentation.md)
-* [Client Docs](/sdk/Documentation.md)
+* [Server](/platform/Documentation.md)
+* [Deploy](/platform/Documentation.md?id=deploy)
+* [REST + JS Client](/sdk/Documentation.md)
