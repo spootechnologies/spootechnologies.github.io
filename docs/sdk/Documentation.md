@@ -1088,7 +1088,7 @@ Important: When you are using the REST API, make sure to attach your access toke
 
 
 
-# Access Control 
+# Permissions
 
 
 Access Control lets you manage what a user can do with an object. For it to work, you need two things, that are mapped together:
@@ -1177,6 +1177,36 @@ m | Update property conditions and reference query
 e | Execute an action property
 f | Update action property (change DSL Snippet)
 l | Change user privileges
+
+
+# Authorisations
+
+Authorisations allow you to define what a user can do with objects matching a specific query.
+
+Example structure inside a user:
+
+```json
+{
+  username: "user",
+  authorisations: {
+    '*': { // '*' is for "all apps"
+      name: "do anything", // a name for the authorisation (optional)
+      query: { // the query to match the objects
+        name: {$regex: "te"}
+      },
+      perm: "crud" // the permission codes
+    }
+  }
+}
+```
+
+Methods:
+
+Method | Description
+--------- | -------- |
+`setAuthorisation({name: "", query: {...}, perm: "crud"})`  | Set a new authorisation |
+`removeAuthorisation("authorisationName")`  | Removes an authorisation by its name |
+
 
 
 ## SPOO Admin
