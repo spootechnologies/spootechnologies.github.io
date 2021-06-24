@@ -36,7 +36,7 @@ SPOO.REST({
 }).run()
 ```
 
-# Set up a Client (SDK)
+# Set up a Client (JavaScript SDK)
 
 > Install via npm or script tag:
 
