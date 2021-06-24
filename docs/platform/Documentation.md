@@ -43,10 +43,7 @@ SPOO.REST({
 }).run()
 ```
 
-
-# API Basics
-
-Once your platform is up and running, you should try some basics, like creating a workspace and registering a user.
+# API
 
 ## REST Interface
 
@@ -65,9 +62,86 @@ This will splin up the API at `/api`:
 HOST/api
 ```
 
-## Object Families
+## Options
 
-Object families are wrappers for different kinds of objects. 
+...
+
+## Endpoints
+
+..
+
+
+# Workspaces
+
+For ***multitenancy***, any SPOO Platform can have multiple workspaces. Each workspace is an isolated space for each tenant.
+
+The workspace registration feature is enabled by default, but can be changed with:
+
+```javascript
+SPOO.allowClientRegistrations = true | false
+```
+
+## Create a workspace
+
+Creating a workspace is done in two steps:
+
+1. Get a registration key via email
+```curl
+POST HOST/api/client/register {email: "YOUR EMAIL"}
+```
+
+2. Register a workspace with tat key
+```curl
+POST HOST/api/client {registrationKey: "KEY", clientname: "YOUR WORKSPACE NAME"}
+```
+
+
+# User accounts
+
+User accounts are defined using an object wrapper with the `authable` flag set to `true`
+
+```javascript
+SPOO.define({
+   name: "user",
+   pluralName: "users",
+   authable: true
+})
+```
+
+## Register a user
+
+This feature is enabled by default and can be changed with:
+
+```javascript
+SPOO.allowUserRegistrations = true | false
+```
+TO BE DOCUMENTED... (coming soon)
+
+
+# Metadata
+
+The Meta Mapper is a mapper to a MongoDB instance, that holds some basic information for the platform itself. It is used for things like storing workspace information or temporary registrations keys.
+
+
+```javascript
+SPOO.REST({
+  ...
+  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
+  ...
+}).run()
+````
+
+# Messaging system
+
+...
+
+
+# Logic programming
+
+## Dynamic objects
+
+> SPOO uses OBJY for it's abstract, object-driven programming model. Specific endpoints are mapped to predefined object methods, like add, update, query, get and remove. Logic can be implemented using these objects. Learn more about OBJY here...
+
 
 ```javascript
 SPOO.define({
@@ -88,7 +162,7 @@ SPOO.define({
 
 ````
 
-### Custom Mappers
+## Custom Mappers
 
 Every Object Wrapper can have custom plugged-in technologies for `persistence`, `processing` and `observing`
 
@@ -100,158 +174,3 @@ SPOO.define({
   observer: new interval() 
 })
 ````
-
-
-## Workspaces
-
-For ***multitenancy***, any SPOO Platform can have multiple workspaces. Each workspace is an isolated space for each tenant.
-
-The workspace registration feature is enabled by default, but can be changed with:
-
-```javascript
-SPOO.allowClientRegistrations = true | false
-```
-
-### Create a workspace
-
-Creating a workspace is done in two steps:
-
-1. Get a registration key via email
-```curl
-POST HOST/api/client/register {email: "YOUR EMAIL"}
-```
-
-2. Register a workspace with tat key
-```curl
-POST HOST/api/client {registrationKey: "KEY", clientname: "YOUR WORKSPACE NAME"}
-```
-
-## User accounts
-
-User accounts are defined using an object wrapper with the `authable` flag set to `true`
-
-```javascript
-SPOO.define({
-   name: "user",
-   pluralName: "users",
-   authable: true
-})
-```
-
-### Register a user
-
-This feature is enabled by default and can be changed with:
-
-```javascript
-SPOO.allowUserRegistrations = true | false
-```
-TO BE DOCUMENTED... (coming soon)
-
-
-## Meta Mapper
-
-The Meta Mapper is a mapper to a MongoDB instance, that holds some basic information for the platform itself. It is used for things like storing workspace information or temporary registrations keys.
-
-
-```javascript
-SPOO.REST({
-  ...
-  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
-  ...
-}).run()
-````
-
-
-# Deploy
-
-Any SPOO Platform can be deployed in different architectures and scales.
-
-
-* 1. Create a platform file (e.g. platform.js)
-* 2. Define your platform
-* 3. Run the file
-
-
-#### Example Platform File (platform.js)
-
-```javascript
-const SPOO = require('spoo');
-
-SPOO.define({
-  name: "user",
-  pluralName: "users",
-  authable: true
-})
-
-SPOO.REST({
-  port: 80
-}).run()
-```
-
-
-## Command Line
-
-```shell
-node platform.js
-```
-
-
-## Docker
-
-> Dockerfile:
-
-```Dockerfile
-FROM node:alpine
-
-add platform.js ./
-RUN npm i
-CMD node platform.js
-EXPOSE 80
-```
-
-> In your shell:
-
-```shell
-docker build -t spoo-platform .
-docker run ...
-```
-
-## Kubernetes
-
-SPOO can also be deployed on Kubernetes with a SPOO deployment and a corresponding service. 
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: spoo-platform
-  labels:
-    app: platform
-spec:
-  selector:
-    matchLabels:
-      app: platform
-  template:
-    metadata:
-      labels:
-        app: platform
-    spec:
-      containers:
-      - name: spoo-platform
-        image: REPO...
-        ports:
-          - name: http
-            containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: spoo-platform-service
-spec:
-  selector:
-    app: platform
-  ports:
-   - protocol: TCP
-     port: 80
-     targetPort: http
-```

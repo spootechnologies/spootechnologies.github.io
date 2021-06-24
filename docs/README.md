@@ -1,13 +1,13 @@
 # Quickstart 
 
-Welcome to the SPOO Documentation Site. Here you'll find the docs for the SPOO framework as well as for the JS Client SDK and REST API.
+Welcome to the SPOO Documentation. Here you'll find the docs for the SPOO framework as well as for the JS Client SDK and REST API.
 The following quick examples show you how to spin up a platform and a client with just a few lines of code.
 
 ![Platform](https://spoo.io/assets/img/platform.png)
 
 > For running a basic platform you will need ***Node.js***, ***Redis*** and ***MongoDB***
 
-# Spin up a Platform
+# Spin up a basic Platform
 
 ```shell
 npm i spoojs
@@ -41,11 +41,11 @@ SPOO.REST({
 > Install via npm or script tag:
 
 ```html
-<script src="spoo.js">
+<script src="https://cdn.jsdelivr.net/npm/@spootechnologies/spooclient@0.0.13/index.js">
 ```
 or
 ```shell
-npm i spoo-client
+npm i @spootechnologies/spooclient
 ```
 
 ```javascript
@@ -89,8 +89,7 @@ spoo.io().object("objectid...").addProperty({
 
 ## Authors
 
-* **Marco Boelling** - *Initial work* - [Twitter](https://twitter.com/marcoboelling)
-
+* **Marco Boelling** - *Creator* - [Twitter](https://twitter.com/marcoboelling)
 
 ## License
 
@@ -99,4 +98,3 @@ SPOO is open source and licensed under the GNU Affero General Public License.
 ## Further reading
 
 * For more information on SPOO, go to [spoo.io](https://spoo.io)
-
