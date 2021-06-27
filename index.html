@@ -250,15 +250,16 @@ SPOO.REST({
                         <div class=" ">
                             <div class="main-card-label"><b>3. Access from a client</b></div>
                             <pre style="font-size:15px;">
-                                    <code class="javascript" style="padding:0px;font-size:19px" >// Add an object
+                                    <code class="html" style="padding:0px;font-size:19px" >&#60;script src="https://cdn.jsdelivr.net/npm/@spootechnologies/spooclient@0.0.13/index.js">
+&#60;script>
+// Authenticate
+spoo.io().auth('username', 'password', (data, err) => {})
+
+// Add an object
 spoo.io()
     .object({name "hello world"})
     .add((obj, err) => {})
-
-// Query objects
-spoo.io()
-    .objects({name: "hello world"})
-    .get((objs, err) => {})
+&#60;/script>
 </code></pre>
                         </div>
                     </div>
