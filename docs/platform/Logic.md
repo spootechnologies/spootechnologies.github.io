@@ -1,5 +1,4 @@
-
-# Logic programming
+# OBJY
 
 ## Dynamic objects
 

@@ -7,24 +7,25 @@ The following quick examples show you how to spin up a platform and a client wit
 
 > For running a basic platform you will need ***Node.js***, ***Redis*** and ***MongoDB***
 
-# Spin up a basic Platform
+# Spin up a basic (minimal) platform
 
 ```shell
-npm i spoojs
+npm i spoojs objy
 ```
 
 ```javascript
 // 1. import spoo
 const SPOO = require('spoojs');
+const OBJY = require('objy');
 
 // 2. define some "object wrappers"
-SPOO.define({
+OBJY.define({
   name: "user",
   pluralName: "users",
   authable: true
 })
 
-SPOO.define({
+OBJY.define({
   name: "object",
   pluralName: "objects"
 })
@@ -32,7 +33,58 @@ SPOO.define({
 // 3. run the platform via REST
 SPOO.REST({
   port:80,
+  OBJY,
   metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost") // The matamapper is for basic config
+}).run()
+```
+
+# Spin up a real-life (advanced) platform
+
+```shell
+npm i spoojs objy objy-catalog
+```
+
+```javascript
+// 1. import spoo
+const SPOO = require('spoojs');
+const OBJY = require('objy');
+const OBJY_CATALOG = require('objy-catalog');
+
+// Define a mongo connection (for use with multiple object families)
+var mongoCon = new OBJY_CATALOG.mappers.storage.mongo(OBJY).connect('mongodb://localhost', function(data) {
+    console.info('mongo connected')
+}, function(err) {
+    console.info('mongo not connected:', err)
+});
+
+// 2. define some "object wrappers"
+OBJY.define({
+  name: "user",
+  pluralName: "users",
+  authable: true,
+  // Attach a mongo mapper with the previously initialized mongo connection
+  storage: new OBJY_CATALOG.mappers.storage.mongo(OBJY).useConnection(mongoCon.getConnection(), function() {})
+})
+
+OBJY.define({
+  name: "object",
+  pluralName: "objects",
+  storage: new OBJY_CATALOG.mappers.storage.mongo(OBJY).useConnection(mongoCon.getConnection(), function() {})
+})
+
+// 3. run the platform via REST
+SPOO.REST({
+  port:80,
+  OBJY,
+  // Use a "message mapper" which handles internal email communication (e.g. reset passwort, etc).
+  messageMapper: new SPOO.messageMappers.sendgridMapper().connect("API_KEY"),
+  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
+  // Specify redis connection for handling user sessions. Defaults to localhost
+  redisCon: {
+      host: "redis host",
+      port: 6380,
+      password: "bla"
+  }
 }).run()
 ```
 
@@ -85,7 +137,6 @@ spoo.io().object("objectid...").addProperty({
   console.log(data); // {...updated object...}
 })
 ```
-
 
 ## Authors
 
