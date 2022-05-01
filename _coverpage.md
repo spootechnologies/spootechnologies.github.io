@@ -1,46 +1,40 @@
 <!-- _coverpage.md -->
 
 <div style="height:100px"></div>
-<img src="assets/img/shuttlecarrier.png" style="width:20%">
-<br>
+
 <span style="font-size: 50px;color:#b14aad">Build your own Platform
 </span>
 
-<br>
 
-<span style="font-size:22px">
+<span style="font-size:20px">
 SPOO is a framework that lets you build custom platforms easily and everywhere,<br> using abstract objects. It comes with built-in features, like authorization, messaging, user handling.
 </span>
-
 <br><br>
-
-<a href="/docs" class="btn-primary">Get started</a> <a href="https://github.com/spootechnologies/spoo" class="btn">Github</a> <a href="https://www.npmjs.com/package/spoojs" class="btn">npm</a>
-
-<br>
 
 <center style="width: 100%;align-items: center;justify-content: center;max-width:100%;white-space:nowrap">
 
-<div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:20px;border-radius:5px; display: block;overflow-x: scroll">
+<div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:10px;border-radius:5px; display: block;overflow-x: scroll">
 	<pre>
-	<code class="lang-puzzle" style="font-size:22px !important;color:#EEEEEE">
-<span style="color: grey">// Define your server</span>
-
-const SPOO = require('spoojs');
-const OBJY = require('objy');
-
+	<code class="lang-puzzle" style="font-size:20px !important;color:#EEEEEE">
+<span style="color: grey">// 1. Define your data</span>
 OBJY.define({
     name: "object", 
     pluralName: "objects",
     storage: new MongoMapper('localhost').connect()
 })
 
+<span style="color: grey">// 2. Start the server</span>
 SPOO.REST({
     OBJY,
     port: 80
-}).run()
-</code>
+}).run()</code>
 	</pre>
 </div>
+
+
+<!--Deploy to: <a class="btn-sm">Google Cloud</a> <a class="btn-sm">AWS</a> <a class="btn-sm">Azure</a> <a class="btn-sm">Netlify Edge functions</a>  <a>Explore more...</a>-->
+
+<br>
 
 <div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:20px;border-radius:5px; display: block;overflow-x: scroll">
 	<pre>
