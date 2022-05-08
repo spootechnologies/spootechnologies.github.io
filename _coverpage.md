@@ -16,6 +16,9 @@ SPOO is a framework that lets you build custom platforms easily and everywhere,<
 <div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:10px;border-radius:5px; display: block;overflow-x: scroll">
 	<pre>
 	<code class="lang-puzzle" style="font-size:20px !important;color:#EEEEEE">
+let OBJY = require('objy');
+let SPOO = require('spoojs');
+
 <span style="color: grey">// 1. Define your data</span>
 OBJY.define({
     name: "object", 
@@ -24,11 +27,8 @@ OBJY.define({
 })
 
 <span style="color: grey">// 2. Start the server</span>
-SPOO.REST({
-    OBJY,
-    port: 80
-}).run()</code>
-	</pre>
+SPOO.REST({ OBJY, port: 80 }).run()</code>
+</pre>
 </div>
 
 
@@ -40,13 +40,13 @@ SPOO.REST({
 	<pre>
 	<code class="lang-puzzle" style="font-size:22px !important;color:#EEEEEE">
 <span style="color: grey">// Build a client</span>
-
 &#60;script src="https://cdn.jsdelivr.net/npm/@spootechnologies/spooclient@0.0.13/index.js">
 &#60;script>
-// Authenticate
+
+<span style="color: grey">// Authenticate</span>
 spoo.io().auth('username', 'password', (data, err) => {})
 
-// Add an object
+<span style="color: grey">// Add an object</span>
 spoo.io()
     .object({name "hello world"})
     .add((obj, err) => {})
