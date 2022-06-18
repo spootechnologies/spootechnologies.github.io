@@ -1,6 +1,6 @@
 <!-- _coverpage.md -->
 
-<div style="height:100px"></div>
+<div style="height:200px"></div>
 
 <span style="font-size: 50px;color:#b14aad">Build your own Platform
 </span>
@@ -11,15 +11,14 @@ SPOO is a framework that lets you build custom platforms easily and everywhere,<
 </span>
 <br><br>
 
+<div style="height:100px"></div>
+
 <center style="width: 100%;align-items: center;justify-content: center;max-width:100%;white-space:nowrap">
 
-<div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:10px;border-radius:5px; display: block;overflow-x: scroll">
-	<pre>
-	<code class="lang-puzzle" style="font-size:20px !important;color:#EEEEEE">
-let OBJY = require('objy');
-let SPOO = require('spoojs');
+<h2>SERVER</h2>
 
-<span style="color: grey">// 1. Define your data</span>
+<div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:10px;border-radius:5px; display: block;overflow-x: scroll">
+	<pre><code class="lang-puzzle" style="font-size:20px !important;color:#EEEEEE"><span style="color: grey">// 1. Define your data</span>
 OBJY.define({
     name: "object", 
     pluralName: "objects",
@@ -36,23 +35,16 @@ SPOO.REST({ OBJY, port: 80 }).run()</code>
 
 <br>
 
+<h2>CLIENT</h2>
 <div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:20px;border-radius:5px; display: block;overflow-x: scroll">
-	<pre>
-	<code class="lang-puzzle" style="font-size:22px !important;color:#EEEEEE">
-<span style="color: grey">// Build a client</span>
-&#60;script src="https://cdn.jsdelivr.net/npm/@spootechnologies/spooclient@0.0.13/index.js">
-&#60;script>
-
-<span style="color: grey">// Authenticate</span>
+	<pre><code class="lang-puzzle" style="font-size:22px !important;color:#EEEEEE"><span style="color: grey">// Authenticate</span>
 spoo.io().auth('username', 'password', (data, err) => {})
 
 <span style="color: grey">// Add an object</span>
 spoo.io()
     .object({name "hello world"})
     .add((obj, err) => {})
-&#60;/script>
-</code>
-	</pre>
+&#60;/script></code></pre>
 </div>
 <!--div style="background: #111111;width:600px;text-align:left;padding:20px;margin:20px;border-radius:5px; display: inline-block;">
 	<pre>
