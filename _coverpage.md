@@ -11,11 +11,11 @@ SPOO is a framework that lets you build custom platforms easily and everywhere,<
 </span>
 <br><br>
 
-<div style="height:100px"></div>
+<div style="height:10px"></div>
 
 <center style="width: 100%;align-items: center;justify-content: center;max-width:100%;white-space:nowrap">
 
-<h2>SERVER</h2>
+<!--h2>EXAMPLE</h2-->
 
 <div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:10px;border-radius:5px; display: block;overflow-x: scroll">
 	<pre><code class="lang-puzzle" style="font-size:20px !important;color:#EEEEEE"><span style="color: grey">// 1. Define your data</span>
@@ -33,7 +33,7 @@ SPOO.REST({ OBJY, port: 80 }).run()</code>
 
 <!--Deploy to: <a class="btn-sm">Google Cloud</a> <a class="btn-sm">AWS</a> <a class="btn-sm">Azure</a> <a class="btn-sm">Netlify Edge functions</a>  <a>Explore more...</a>-->
 
-<br>
+<!--br>
 
 <h2>CLIENT</h2>
 <div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:20px;border-radius:5px; display: block;overflow-x: scroll">
