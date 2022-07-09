@@ -7,11 +7,14 @@ The following quick examples show you how to spin up a platform and a client wit
 
 > For running a basic platform you will need ***Node.js***, ***Redis*** and ***MongoDB***
 
-## Spin up a basic (minimal) platform
+## Install
 
 ```shell
 npm i spoojs objy
 ```
+
+
+## Spin up a basic platform
 
 ```javascript
 // 1. import spoo
@@ -38,57 +41,7 @@ SPOO.REST({
 }).run()
 ```
 
-## Spin up a real-life (advanced) platform
-
-```shell
-npm i spoojs objy objy-catalog
-```
-
-```javascript
-// 1. import spoo
-const SPOO = require('spoojs');
-const OBJY = require('objy');
-const OBJY_CATALOG = require('objy-catalog');
-
-// Define a mongo connection (for use with multiple object families)
-var mongoCon = new OBJY_CATALOG.mappers.storage.mongo(OBJY).connect('mongodb://localhost', function(data) {
-    console.info('mongo connected')
-}, function(err) {
-    console.info('mongo not connected:', err)
-});
-
-// 2. define some "object wrappers"
-OBJY.define({
-  name: "user",
-  pluralName: "users",
-  authable: true,
-  // Attach a mongo mapper with the previously initialized mongo connection
-  storage: new OBJY_CATALOG.mappers.storage.mongo(OBJY).useConnection(mongoCon.getConnection(), function() {})
-})
-
-OBJY.define({
-  name: "object",
-  pluralName: "objects",
-  storage: new OBJY_CATALOG.mappers.storage.mongo(OBJY).useConnection(mongoCon.getConnection(), function() {})
-})
-
-// 3. run the platform via REST
-SPOO.REST({
-  port:80,
-  OBJY,
-  // Use a "message mapper" which handles internal email communication (e.g. reset passwort, etc).
-  messageMapper: new SPOO.messageMappers.sendgridMapper().connect("API_KEY"),
-  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
-  // Specify redis connection for handling user sessions. Defaults to localhost
-  redisCon: {
-      host: "redis host",
-      port: 6380,
-      password: "bla"
-  }
-}).run()
-```
-
-## Set up a Client (JavaScript SDK)
+## Set up a client
 
 > Install via npm or script tag:
 
@@ -143,39 +96,41 @@ spoo.io().object("objectid...").addProperty({
 
 ## Dynamic objects
 
-> SPOO uses OBJY for it's abstract, object-driven programming model. Specific endpoints are mapped to predefined object methods, like add, update, query, get and remove. Logic can be implemented using these objects. Learn more about OBJY here...
+> SPOO uses OBJY for it's abstract, object-driven programming model. Specific endpoints are mapped to predefined object methods, like add, update, query, get and remove. Logic can be implemented using these objects.
 
 
 ```javascript
-SPOO.define({
+const SPOO = require('spoojs');
+const OBJY = require('objy');
 
-  // needed params:
+OBJY.define({
   name: "template", // the singular name for single object access
   pluralName: "templates", // the plural name for access to multiple objects
 
   // optional params:
   authable: false, // Sets wether objects of an object family can authenticate (login) against the platform
   templateFamily: "templates", // Defines, where inherited objects are retrieved from. Defaults to object family itself.
+});
 
-  // overwrite mappers (default mappers are all in memory):
-  storage: new mongo("..."),
-  processor: new vm(""),
-  observer: new interval() 
-})
-
+SPOO.REST({ OBJY, ...}).run()
 ````
 
 ## Custom Mappers
 
 Every Object Wrapper can have custom plugged-in technologies for `persistence`, `processing` and `observing`
 
-
 ```javascript
-SPOO.define({
+const SPOO = require('spoojs');
+const OBJY = require('objy');
+
+OBJY.define({
+  ...
   storage: new mongo("..."),
   processor: new vm(""),
   observer: new interval() 
-})
+});
+
+SPOO.REST({ OBJY, ...}).run()
 ````
 
 ## REST Interface
@@ -183,22 +138,22 @@ SPOO.define({
 The REST Interface is the default interface in SPOO. It spins up an express server, that has all the required SPOO routes ready.
 
 ```javascript
+const SPOO = require('spoojs');
+const OBJY = require('objy');
+
 SPOO.REST({
   port: 80, // The port to run on
   redisCon: "localhost", // The redis connection (for session storage)
+  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
 })
 ````
 
-This will splin up the API at `/api`:
-
-```curl
-HOST/api
-```
+This will splin up the API at `domain.com/api`:
 
 
 ## Workspaces
 
-For ***multitenancy***, any SPOO Platform can have multiple workspaces. Each workspace is an isolated space for each tenant.
+For ***multitenancy***, any SPOO platform can have multiple workspaces. Each workspace is an isolated space for each tenant.
 
 The workspace registration feature is enabled by default, but can be changed with:
 
@@ -218,6 +173,11 @@ POST HOST/api/client/register {email: "YOUR EMAIL"}
 POST HOST/api/client {registrationKey: "KEY", clientname: "YOUR WORKSPACE NAME"}
 ```
 
+## Applications
+
+All data (objects) of a tenant are scoped with applications.
+
+...
 
 ## User accounts
 
@@ -230,21 +190,3 @@ SPOO.define({
    authable: true
 })
 ```
-
-## Metadata
-
-The Meta Mapper is a mapper to a MongoDB instance, that holds some basic information for the platform itself. It is used for things like storing workspace information or temporary registrations keys.
-
-
-```javascript
-SPOO.REST({
-  ...
-  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
-  ...
-}).run()
-````
-
-## Messaging system
-
-...
-
