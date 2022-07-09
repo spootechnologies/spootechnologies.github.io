@@ -9,21 +9,24 @@
 
 
 <span style="font-size:20px">
-SPOO is a framework that lets you build custom platforms easily and everywhere.<br> It comes with built-in features, like:
-
-<br>
-
-<b>Object-based logic, Authorization, Messaging, User handling and more</b>
+SPOO is a framework that lets you build custom platforms easily and everywhere.<br> It comes with built-in features, like: <b>Object-based logic, Authorization, Messaging, User handling and more</b>
 </span>
 <br><br>
+<br>
+<br>
+<!--b>DEPLOY TO:</b>
 
+<br-->
+
+
+<a class="btn-sm" href="docs/#/README">Quickstart</a> &nbsp; &nbsp; <a href="docs/#/platform/Deploy">Deploy</a>
 <div style="height:10px"></div>
 
 <center style="width: 100%;align-items: center;justify-content: center;max-width:100%;white-space:nowrap">
 
 <!--h2>EXAMPLE</h2-->
 
-<div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:10px;border-radius:5px; display: block;overflow-x: scroll">
+<!--div style="background: #111111;width:900px;max-width:100%;text-align:left;padding:20px;margin:10px;border-radius:5px; display: block;overflow-x: scroll">
 	<pre><code class="lang-puzzle" style="font-size:20px !important;color:#EEEEEE"><span style="color: grey">// SERVER
 // 1. Define your data</span>
 OBJY.define({name: "object", pluralName: "objects"})
@@ -34,7 +37,7 @@ SPOO.REST({ OBJY, port: 80 }).run()</code>
 </div>
 
 
-<!--Deploy to: <a class="btn-sm">Google Cloud</a> <a class="btn-sm">AWS</a> <a class="btn-sm">Azure</a> <a class="btn-sm">Netlify Edge functions</a>  <a>Explore more...</a>-->
+
 <b>
 ^<br>
 |</b>
@@ -49,7 +52,7 @@ spoo.io()
     .object({name "hello world"})
     .add((obj, err) => {})
 &#60;/script></code></pre>
-</div>
+</div-->
 <!--div style="background: #111111;width:600px;text-align:left;padding:20px;margin:20px;border-radius:5px; display: inline-block;">
 	<pre>
 	<code class="lang-puzzle" style="font-size:25px !important;color:#EEEEEE">
