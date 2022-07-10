@@ -3,9 +3,11 @@
 <div style="height:200px"></div>
 
 <img src="assets/img/shuttlecarrier.png" style="width: 250px;max-width:100%;">
-
+<div class="title">SPOO EXTENTION FOR OBJY</div>
+<br>
 <span style="font-size: 50px;color:#b14aad">Build your own Platform
 </span>
+<br>
 
 
 <span style="font-size:20px">
