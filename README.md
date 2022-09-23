@@ -961,33 +961,24 @@ Method | Description
 
 ## Querying
 
-
 Querying lets you find objects by some criteria you define.
-
-Queries can be made in two ways:
-
-- ***Simple Queries*** To quickly search in a key/value manner
-- ***Complex Queries*** To search in a more complex and broader way
 
 You can query object's ***metadata*** and ***properties***
 
 For metadata queries, use the name of the attribute, e.g. `name` or `type`
-
-For property queries, use dot-notation to access single properties, e.g. `properties.height`
-
 
 
 ### Simple Queries
 
 ```shell
 # Works for /objects, /templates, /eventlogs, /files, /users
-curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?name=my object&type=/fir/&properties.myProp=/val/"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?name=my object&type=/fir/&myProp.value=/val/"
 
 
 ```
 ```javascript
 // Works for: Objects(), Templates(), EventLogs(), Users()
-spoo.io().Objects({name : "my object", "type" : "/fir/", "properties.myProp.value" : "/val/"}).get(function(data, err)
+spoo.io().Objects({name : "my object", "type" : "/fir/", "myProp.value" : "/val/"}).get(function(data, err)
 {
 })
 ```
@@ -1062,16 +1053,16 @@ $query | {$or: [{name : "my object"}, {name : "not my object"} ]} | Perform an O
 # Works for /objects, /templates, /eventlogs, /files, /users
 
 # simple query
-curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?properties.myProp=my value"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?myProp.value=my value"
 
 # complex query
-curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'properties.myProp.value' : 'my value'}"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'myProp.value' : 'my value'}"
 
 # simple nested query
-curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?properties.myProp.firstItem=my value"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?myProp.firstItem=my value"
 
 # complex nested query
-curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'properties.myProp.properties.firstProp.value' : 'my value'}"
+curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'myProp.properties.firstProp.value' : 'my value'}"
 
 ```
 
@@ -1079,55 +1070,25 @@ curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query={'properti
 // Works for: Objects(), Templates(), EventLogs(), Users()
 
 // simple query
-spoo.io().Objects({"properties.myProp" : "my value"}).get(function(data, err)
+spoo.io().Objects({"myProp" : "my value"}).get(function(data, err)
 {
 })
 
 // complex query
-spoo.io().Objects({$query = {"properties.myProp.value" : "my value"}}).get(function(data, err)
+spoo.io().Objects({$query = {"myProp.value" : "my value"}}).get(function(data, err)
 {
 })
 
 // simple nested query
-spoo.io().Objects({"properties.myProp.firstItem" : "my value"}).get(function(data, err)
+spoo.io().Objects({"myProp.firstItem" : "my value"}).get(function(data, err)
 {
 })
 
 // complex nested query
-spoo.io().Objects({$query = {"properties.myProp.properties.firstItem.value" : "my value"}}).get(function(data, err)
+spoo.io().Objects({$query = {"myProp.properties.firstItem.value" : "my value"}}).get(function(data, err)
 {
 })
 ```
-
-<aside class="warning">
-Please note, that in complex queries, properties have to be accessed with exact dot-notation, while in simple queries they are accessed by property name only.
-</aside>
-
-Examples:
-
-***Accessing values:***
-
-Simple Query | Description
---------- | --------
-`properties.myProp : "my value"`  | In simple queries, you only have to reference the property name. 
-
-Complex Query | Description
---------- | --------
-`properties.myProp.value : "my value"`  | In complex queries you have to specify the value attribute inside the property
-
-
-
-***Accessing nested property values:***
-
-Simple Query | Description
---------- | --------
-`properties.myBag.firstItem : "my value"`  | In simple queries, you only have to reference the property names. 
-
-Complex Query | Description
---------- | --------
-`properties.myBag.properties.firstItem.value : "my value"`  | In complex queries you have to specify the exact path to the value
-
-
 
 ## Permissions
 
