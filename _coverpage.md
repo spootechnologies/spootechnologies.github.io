@@ -10,7 +10,7 @@
 
 
 <span style="font-size:20px">
-SPOO is a framework that lets you build custom platforms easily and everywhere.<br> It comes with built-in features, like: <b>Object-based logic, Multitenancy, Authorization, Messaging, User handling and more</b>
+SPOO is a framework that lets you build custom platforms with built-in features, like:<br> <b>Object-based logic, Multitenancy, Authorization, Messaging, User handling and more</b>
 </span>
 <br><br>
 <br>

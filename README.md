@@ -6,6 +6,58 @@ The following quick examples show you how to spin up a platform and a client wit
 
 > For running a basic platform you will need ***Node.js***, ***Redis*** and ***MongoDB***
 
+# BASICS
+
+## Objects
+
+> SPOO uses OBJY for it's abstract, object-driven programming model. Specific endpoints are mapped to predefined object methods, like add, update, query, get and remove. Logic can be implemented using these objects.
+
+
+```javascript
+OBJY.define({
+  name: "template", // the singular name for single object access
+  pluralName: "templates", // the plural name for access to multiple objects
+
+  // optional params:
+  authable: false, // Sets wether objects of an object family can authenticate (login) against the platform
+  templateFamily: "templates", // Defines, where inherited objects are retrieved from. Defaults to object family itself.
+});
+````
+
+
+## Workspaces
+
+For ***multitenancy***, any SPOO platform can have multiple workspaces. Each workspace is an isolated space for each tenant.
+
+Creating a workspace is done in two steps:
+
+1. Get a registration key via email
+```curl
+POST HOST/api/client/register {email: "YOUR EMAIL"}
+```
+
+2. Register a workspace with that key
+```curl
+POST HOST/api/client {registrationKey: "KEY", clientname: "YOUR WORKSPACE NAME"}
+```
+
+## Applications
+
+All data (objects) of a tenant are scoped with applications. See more in the clients section.
+
+## User accounts
+
+User accounts are defined using an object wrapper with the `authable` flag set to `true`. Users are plain objects with the difference, that user objects can authenticate against the platform. They contain login informations, such as username, email and password. 
+
+```javascript
+OBJY.define({
+   name: "user",
+   pluralName: "users",
+   authable: true
+})
+```
+
+
 # SERVER
 
 ## Install
@@ -44,30 +96,37 @@ SPOO.REST({
 
 This will splin up the API at `domain.com/api`:
 
+## Configuration
 
-# FUNDAMENTALS
-
-
-## Dynamic objects
-
-> SPOO uses OBJY for it's abstract, object-driven programming model. Specific endpoints are mapped to predefined object methods, like add, update, query, get and remove. Logic can be implemented using these objects.
-
+When defining the REST endpoint using `SPOO.REST({...})` you can pass options.
 
 ```javascript
-const SPOO = require('spoojs');
-const OBJY = require('objy');
+SPOO.REST({
+  // MANDATORY OPTIONS:
 
-OBJY.define({
-  name: "template", // the singular name for single object access
-  pluralName: "templates", // the plural name for access to multiple objects
+  // OBJY instance
+  OBJY: OBJY,
+  // Redis connection. Either object or connection string
+  redisCon: {
+    host: 'localhost',
+    port: 0000
+  },
+  // OR: redisCon: "redis://localhost"
+  // Metamapper for storing general information about the platform
+  metaMapper: new SPOO.metaMappers.mongoMapper().connect("mongodb://localhost"),
+  messageMapper: new SPOO.messaeMappers.sendgridMapper().connect("sendgrid api key"),
 
-  // optional params:
-  authable: false, // Sets wether objects of an object family can authenticate (login) against the platform
-  templateFamily: "templates", // Defines, where inherited objects are retrieved from. Defaults to object family itself.
-});
+  // OPTIONAL OPTIONS:
 
-SPOO.REST({ OBJY, ...}).run()
-````
+  // Port where the platform runs
+  port:80,
+  // JWT Secret for authenticating using JWT tokens
+  jwtSecret: "secret",
+  // Public Platform: If true, all read operations are public, only write operations require authentication.
+  publicPlatform: false,
+}).run()
+```
+
 
 ## Custom Mappers
 
@@ -86,45 +145,6 @@ OBJY.define({
 
 SPOO.REST({ OBJY, ...}).run()
 ````
-
-
-## Workspaces
-
-For ***multitenancy***, any SPOO platform can have multiple workspaces. Each workspace is an isolated space for each tenant.
-
-The workspace registration feature is enabled by default, but can be changed with:
-
-```javascript
-SPOO.allowClientRegistrations = true | false
-```
-
-Creating a workspace is done in two steps:
-
-1. Get a registration key via email
-```curl
-POST HOST/api/client/register {email: "YOUR EMAIL"}
-```
-
-2. Register a workspace with that key
-```curl
-POST HOST/api/client {registrationKey: "KEY", clientname: "YOUR WORKSPACE NAME"}
-```
-
-## Applications
-
-All data (objects) of a tenant are scoped with applications. See more in the clients section.
-
-## User accounts
-
-User accounts are defined using an object wrapper with the `authable` flag set to `true`. Users are plain objects with the difference, that user objects can authenticate against the platform. They contain login informations, such as username, email and password. 
-
-```javascript
-OBJY.define({
-   name: "user",
-   pluralName: "users",
-   authable: true
-})
-```
 
 # CLIENTS
 
