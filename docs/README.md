@@ -167,22 +167,25 @@ Get it from npm or via spoo.io
 
 
 ```html
-<script src="URL.com/code/spoo-cloud.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/objy/dist/browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/objy-connect/index.js"></script>
 ```
 
 or
 
 ```javascript
-npm install spoocloud-js
+npm install objy objy-client
 ```
 
 
 ```javascript
-// Initialize
-spoo = new SPOO_Client("WORKSPACE").App("APP");
+let spoo = new CONNECT(OBJY)
 
-// Usage
-spoo.io().//some api function
+OBJY.define({
+  name: "object",
+  pluralName: "objects",
+  storage: spoo
+})
 ```
 
 
@@ -210,13 +213,14 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/auth"
 
 ```
 ```javascript
-spoo.io().auth(
-  "peter", // username
-  "mysupersecretpass", // password
-   function(data, err) {  // callback
-  
-  },true // "stay signed in"
-)
+// Login
+spoo.connect({client: "myclient", url: "https://mydomain.com/api", username: "user", password: "***"}, () => {
+  OBJY.objects({}).get(data => {
+    console.log('data:', data)
+  }, err => {
+    console.log('err:', err)
+  })
+})
 ```
 
 
@@ -290,10 +294,7 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/token"
 
 ```
 ```javascript
-spoo.io().token(
-  "325nfdf89fn3-.235h8nd...", // refresh token
-    function(data, err) { // callback
-})
+tbd
 ```
 
 > Refreshing a token returns the same information as in authentication
@@ -319,9 +320,7 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/token/reject"
 
 ```
 ```javascript
-spoo.io().logout(
-    function(data, err) { // callback
-})
+tbd
 ```
 
 > Respone message
@@ -352,12 +351,7 @@ curl -X POST "URL.com/api/client/WORKSPACE/application"
 
 ```
 ```javascript
-new Client("WORKSPACE").Application({
-  "name" : "myapp",
-  "displayName" : "My Fancy App"
-}).add(function(data, err)
-{
-})
+tbd
 ```
 
 
@@ -368,11 +362,8 @@ new Client("WORKSPACE").Application({
 curl -X GET "URL.com/api/client/WORKSPACE/applications"
 ```
 
-
 ```javascript
-new Client("WORKSPACE").Applications().get(function(data, err)
-{
-})
+tbd
 ```
 
 > Returns
@@ -394,7 +385,6 @@ To get a list of all connected applications in your client, use thow follwoing s
 
 
 ## Objects
-
 
 
 Objects are the foundation of your applications. They represent entities, hold information, methods, listeners and events.
@@ -442,11 +432,8 @@ spoo.io/.../objects
 ```
 
 ```javascript
-spoo.io().Object(...)
-spoo.io().Objects(...)
-
-spoo.io().User(...)
-spoo.io().Users(...)
+OBJY.object(...)
+OBJY.objects(...)
 ```
 
 
@@ -461,7 +448,7 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/app/<YOUR APP>/object"
 ```
 ```javascript
 // Works for any constructor, like: Object(), Template(), Anything()
-spoo.io().Object({name:"my first object"}).add(function(data, err) {
+OBJY.object({name:"my first object"}).add(function(data, err) {
 })
 ```
 
@@ -503,7 +490,7 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/app/<YOUR APP>/objects"
 ```
 ```javascript
 // Works for any constructor, like: Object(), Template(), Anything()
-spoo.io().Objects([
+OBJY.objects([
     {
       "name" : "my first object"
     },
@@ -557,7 +544,7 @@ curl -X DELETE "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a
 ```
 ```javascript
 // Works for: Object(), Template(), EventLog(), File(), User()
-spoo.io().Object("5a818c47d3ere54a747bfa8e").delete(function(data, err) {
+OBJY.object("5a818c47d3ere54a747bfa8e").delete(function(data, err) {
 })
 ```
 
@@ -604,7 +591,7 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 ```
 ```javascript
 // Works for: Object(), Template(), File(), User()
-spoo.io().Object("5a818c47d3ere54a747bfa8e")
+OBJY.object({_id: "5a818c47d3ere54a747bfa8e"})
   .setName("my name")
   .setType("my type")
   .addApplication("demoapp")
@@ -727,7 +714,7 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 ```
 ```javascript
 // Works for: Object(), Template(), User()
-spoo.io().Object("5a818c47d3ere54a747bfa8e")
+OBJY.object({_id: "5a818c47d3ere54a747bfa8e"})
   .addProperty("my prop", { type: "shortText", value: "hi there"})
   .removeProperty("someOtherProp")
   .setPropertyValue("my prop", "hello world")
@@ -757,7 +744,7 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 ```
 ```javascript
 // Works for: Object(), Template(), User()
-spoo.io().Object("5a818c47d3ere54a747bfa8e")
+OBJY.object({_id: "5a818c47d3ere54a747bfa8e"})
   .setPropertyPermission("my prop", {"admin" : { "value" : "*"}})
   .removePropertyPermission("my prop", "plain_user")
   .setPropertyConditions("smallerThan('xyz')")
@@ -782,7 +769,7 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 ```
 ```javascript
 // Works for: Object(), Template(), User()
-spoo.io().Object("5a818c47d3ere54a747bfa8e")
+OBJY.object({_id: "5a818c47d3ere54a747bfa8e"})
   .addProperty({"myBag.firstItem": { type: "shortText", value: "hi there"}})
   .setPropertyValue("myBag.firstItem", "hello world")
   .save(function(data, err) {
@@ -856,10 +843,7 @@ curl -X POST "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a74
 
 ```
 ```javascript
-// Works for: Object(), Template(), EventLog(), User()
-spoo.io().Object("5a818c47d3ere54a747bfa8e").Property("myAction").call(function(data, err)
-{
-})
+tbd
 ```
 
 > Response
@@ -922,8 +906,8 @@ curl -X PUT "URL.com/api/client/myCompany/app/demoapp/object/5a818c47d3ere54a747
 ```
 ```javascript
 // Works for: Object(), Template(), User()
-spoo.io().Object("5a818c47d3ere54a747bfa8e")
-  .addProperty({"my first event": { type: "event", date: "2018-02-21T14:14:41+00:00", action : "email('from', 'to', 'hi', 'i just happened')"}}})
+OBJY.object({_id: "5a818c47d3ere54a747bfa8e"})
+  .addProperty({"my first event": { type: "event", date: "2018-02-21T14:14:41+00:00", action : "email('from', 'to', 'hi', 'i just happened')"}})
   
   .setEventDate("my first event", "2019-02-21T14:14:41+00:00") // fix date
   // or
@@ -997,9 +981,6 @@ Method | Description
 `setEventAction(propName, DSLSnippet)` | Set the DSL Code Snippet to be executed when the event hits the date
 
 
-
-
-
 ## Querying
 
 Querying lets you find objects by some criteria you define.
@@ -1010,7 +991,7 @@ curl -X POST "URL.com/api/client/myCompany/app/demoapp/objects?$query=$or: [{nam
 ```
 ```javascript
 // Works for: Objects(), Templates(), EventLogs(), Users()
-spoo.io().Objects({$query : { $or: [{name : "my object"}, {name : "not my object"} ]} }).get(function(data, err)
+OBJY.objects({$query : { $or: [{name : "my object"}, {name : "not my object"} ]} }).get(function(data, err)
 {
 })
 ```
@@ -1042,57 +1023,6 @@ Learn more about complex query operator here...
 Key | Value | Description
 --------- | --------| --------
 $query | {$or: [{name : "my object"}, {name : "not my object"} ]} | Perform an OR query
-
-
-## Files
-
-
-Files are objects, that hold some file data.
-
-
-> Upload a File
-
-
-```shell
-# Works for /object, /template, /user
-curl -X PUT "URL.com/api/client/myCompany/app/demoapp/file"
-- H "Content-Type : application/x-www-form-urlencoded"
-- F "file=@/path/to/file"
-- d {
-  "name" : "my file"
-  ...
-}
-```
-
-```javascript
-var formData = new FormData(); 
-var fileInput = document.getElementById('upload');
-var file = fileInput.files[0];
-formData.append("uploadfile", file);
-            
-spoo.io().File({data: formData, name : "my file"}).add(function(data, err)
-{
-
-})
-```
-
-
-### Get File
-
-```shell
-# Works for /object, /template, /user
-curl -X GET "URL.com/api/client/myCompany/app/demoapp/file/248her1928hrr3/data?accessToken=35282hf8nf"
-```
-
-```javascript
-spoo.io().File("248her1928hrr3").path()
-```
-
-To get the file itself, the API offers a way to retrieve the path to the file.
-
-
-Important: When you are using the REST API, make sure to attach your access token in the Query String. This makes it easier to share a file link.
-
 
 
 ## Permissions

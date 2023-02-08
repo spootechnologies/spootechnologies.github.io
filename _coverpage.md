@@ -56,7 +56,7 @@ OBJY.object({
 </code></pre></div>
 </div>
 
-<a class="btn" href="https://objy.xyz/docs/#/./DOCUMENTATION?id=spoo"><b>GET STARTED</b></a>
+<a class="btn" href="/docs"><b>GET STARTED</b></a>
 <div style="height:10px"></div>
 
 <center style="width: 100%;align-items: center;justify-content: center;max-width:100%;white-space:nowrap">
