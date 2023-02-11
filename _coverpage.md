@@ -3,14 +3,14 @@
 <div style="height:100px"></div>
 
 <img src="assets/img/shuttlecarrier.png" style="width: 250px;max-width:100%;">
-
+<br>SPOO - <b><u>S</u>INGLE <u>P</u>OINT <u>O</u>F <u>O</u>BJECT</b><br>
 <span style="font-size: 50px;color:#b14aad">Build your own Platform
 </span>
 <br>
 
 
 <span style="font-size:20px">
-SPOO is a framework that lets you build custom platforms with built-in features, like:<br> <b>Object-based logic (with OBJY), Multitenancy, Authorization, Messaging, User handling and more</b>
+<b>With <a href="https://objy.xyz" target="_blank"><img src="https://objy.xyz/logo.png" style="height:25px;margin-bottom:-7px">OBJY</a> ("Everything is an object"), Built-in Multitenancy, Authorization, Messaging, User handling and more</b>
 </span>
 <br><br>
 <br>
