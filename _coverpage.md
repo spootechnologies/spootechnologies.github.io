@@ -10,7 +10,7 @@
 
 
 <span style="font-size:20px">
-<b>With <a href="https://objy.xyz" target="_blank"><img src="https://objy.xyz/logo.png" style="height:25px;margin-bottom:-7px">OBJY</a> ("Everything is an object"), Built-in Multitenancy, Authorization, Messaging, User handling and more</b>
+<b>With Abstract Objects (<a href="https://objy.xyz" target="_blank"><img src="https://objy.xyz/logo.png" style="height:25px;margin-bottom:-7px">OBJY</a>), Built-in Multitenancy, Authorizations, Permissions, Messaging, User handling and more</b>
 </span>
 <br><br>
 <br>

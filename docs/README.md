@@ -43,7 +43,7 @@ SPOO.REST({
 
 # <b>FUNDAMENTALS</b>
 
-## Dynamic objects
+## Abstract objects
 
 > SPOO uses OBJY for it's abstract, object-driven programming model. Specific endpoints are mapped to predefined object methods, like add, update, query, get and remove. Logic can be implemented using these objects.
 
