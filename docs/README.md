@@ -41,6 +41,47 @@ SPOO.REST({
 }).run()
 ```
 
+## Parameters
+
+Parameters help customizing a SPOO-based platform. Some are reqiured, some are optional. Optional ones have default values as shown below.
+
+```javascript
+SPOO.REST({
+  // REQUIRED
+  OBJY, // OBJY instance
+  metaMapper: new SomeMapper() // The matamapper is for basic config
+  messageMapper: new MessageMapper, // Mapper that handles messaging
+  redisCon: { // Redis connection
+      host: '',
+      port: '',
+      password: '',
+      username: '',
+  },
+  // or redisCon: 'redis://url.com:port'
+  
+
+  // OPTIONAL
+  port: 80, // Port to listen on
+  publicPlatform: false, // When true, ALL read requests don'T require authentication
+  maxUserSessions: 100, // Max concurrent sessions per user
+  userPasswordResetMessage: { // Email params when a user resets a password
+      from: 'mail@domain.com',
+      subject: '',
+      body: '',
+  },
+  clientRegistrationMessage: { // Email params when a client is registered
+      from: 'mail@domain.com',
+      subject: '',
+      body: '',
+  },
+  userRegistrationMessage: { // Email params when a user is registered
+      from: 'mail@domain.com',
+      subject: '',
+      body: '',
+  }
+}).run()
+```
+
 # <b>FUNDAMENTALS</b>
 
 ## Abstract objects
