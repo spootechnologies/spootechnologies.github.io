@@ -58,7 +58,7 @@ SPOO.REST({
       username: '',
   },
   // or redisCon: 'redis://url.com:port'
-  
+
 
   // OPTIONAL
   port: 80, // Port to listen on
@@ -221,6 +221,7 @@ npm install objy objy-client
 
 ```javascript
 let spoo = new CONNECT(OBJY)
+spoo.connect({client: "myclient", url: "https://mydomain.com/api"});
 
 OBJY.define({
   name: "object",
@@ -255,12 +256,8 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/auth"
 ```
 ```javascript
 // Login
-spoo.connect({client: "myclient", url: "https://mydomain.com/api", username: "user", password: "***"}, () => {
-  OBJY.objects({}).get(data => {
-    console.log('data:', data)
-  }, err => {
-    console.log('err:', err)
-  })
+spoo.login({username: "user", password: "***"}, () => {
+  
 })
 ```
 
@@ -335,7 +332,7 @@ curl -X POST "URL.com/api/client/<YOUR CLIENT>/token"
 
 ```
 ```javascript
-tbd
+// Happens automatically, when permanent flag was set true in login
 ```
 
 > Refreshing a token returns the same information as in authentication
@@ -376,9 +373,7 @@ After rejecting an access token, this token can no longer be used. Also, the cor
 
 ## Applications
 
-
 You can have multiple applications connected to your client. An application is basically represented by an ***Application ID***
-
 
 **Add Applications**
 
